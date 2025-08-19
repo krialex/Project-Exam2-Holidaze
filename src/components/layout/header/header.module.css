@@ -1,0 +1,60 @@
+.wrapper {
+  width: 100%;
+  background-image: linear-gradient(to bottom, #6223F7, #BBE1FF);
+  color: #FFF;
+}
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1.6rem;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #FFF;
+  text-decoration: none;
+  font-size: 2.2rem;
+}
+
+.logoSection img {
+  max-width: 72px;
+  border-radius: 50%;
+}
+
+.actions button {
+  margin-left: 1rem;
+}
+
+.heroText {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.heroText h1 {
+  font-family: "Henny Penny", system-ui;
+  font-size: 2.5rem;
+}
+
+button {
+  color: #05059D;
+  background-color: #fff;
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px); 
+}
