@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# typed-css-modules auto-generated files
+*.module.css.d.ts
