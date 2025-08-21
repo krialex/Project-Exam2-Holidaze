@@ -4,13 +4,20 @@ import './App.css'
 
 import { Layout } from './components/layout/layout';
 import { Home } from './pages/Home/home';
+import { Venues } from './pages/Venues/venues';
+
 
 function App() {
 
   return (
     <>
-      <Layout />
-      <Home />
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="venues/:id" element={<Venues />} />
+      
+      </Route>
+    </Routes>  
     </>
   )
 }

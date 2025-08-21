@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useVenuesApi } from "../../common/getVenuesUrl";
 import { Venue } from "../../common/types";
 import { faCheck, faX } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +18,7 @@ export function Home() {
             <div>
             <div className={styles.container}>
                 {venues.map((venue: Venue) => (
-                    <div key={venue.id} className={styles.card}>
+                    <Link key={venue.id} to={`/venues/${venue.id}`} className={styles.card}>
 
                         {venue.media?.[0] && (
                             <img className={styles.cardImage}
@@ -38,7 +39,7 @@ export function Home() {
                             />
                             </p>
                         </div>
-                    </div>
+                    </Link>
                 ))}
                 
             </div>

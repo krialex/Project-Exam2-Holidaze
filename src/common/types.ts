@@ -18,6 +18,9 @@ export interface Venue {
     rating: number;
     meta: {
         breakfast: boolean;
+        wifi: boolean;
+        parking: boolean;
+        pets: boolean;
         /* her kan jeg legge til fler om jeg vil */
     }
 }
