@@ -19,10 +19,10 @@ export function Venues() {
                     alt={venue.media[0].alt || venue.name} 
                 />
                 )}
-                <div>
+                <div className={styles.venueInfo}>
                     <h2>{venue.name}</h2>
-                    <div>
-                        <p>{venue.rating}</p>
+                    <div className={styles.topInfo}>
+                        <p className={styles.reviewBox}>{venue.rating}</p>
                         <ul>
                             <li>Breakfast 
                                 <FontAwesomeIcon
