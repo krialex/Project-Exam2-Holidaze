@@ -33,6 +33,7 @@ h2 {
     font-size: 1.2rem;
     font-weight: bold;
     display: inline-flex;
+    gap: 2px;
     align-items: center;
     justify-content: center;
     padding: 5px;   
@@ -40,7 +41,7 @@ h2 {
     max-width: fit-content;
 }
 
-ul {
+.topListInfo {
     list-style: none;
     display: flex;
     gap: 2rem;
@@ -57,3 +58,56 @@ ul {
     color: #14BB08;
     font-size: 1.5rem;
 }
+
+.infoDetails {
+    display: flex;
+    gap: 5px;
+    justify-content: space-evenly;
+    max-width: 800px;
+}
+
+.description {
+    max-width: 45%;
+}
+
+.bottomInfo {
+    text-align: center;
+    border-radius: 9px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    padding: 0px 22px 15px;
+    height: 100%;
+    align-self: center;
+    margin-top: 35px;
+}
+
+.listInfo {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-style: italic;
+    min-width: 220px;
+    max-width: 250px;
+    gap: 5px;
+}
+
+.listInfo p {
+    margin: 0;
+}
+
+span {
+    font-weight: bold;
+}
+
+.listInfo hr {
+    border: none;              
+    border-top: 1px solid #ccc; 
+    margin: 8px 0;             
+    opacity: 0.5;              
+}
+
+.bookingBtn {
+    background-color: #4B45F2;
+    color: #FFF;
+    margin: 25px 0 20px;
+}
+
