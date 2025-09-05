@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./header.module.css";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { save } from "../../../common/auth/localStorage/Save";
 import { load } from "../../../common/auth/localStorage/Load";
@@ -19,6 +19,7 @@ export function Header({ onSearch }: HeaderProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     function updateUser() {
@@ -53,6 +54,8 @@ export function Header({ onSearch }: HeaderProps) {
     setIsRegisterOpen(true);
   }
 
+  const shouldShowSearch = location.pathname === "/";
+
   return (
     <header className={styles.wrapper}>
       <div className={styles.container}>
@@ -72,13 +75,16 @@ export function Header({ onSearch }: HeaderProps) {
               </>
             ) : (
               <>
-                <span>Hei, {user.name}</span>
+              <div className={styles.logedInState}>
+                <button className={styles.userIcon}><FontAwesomeIcon icon={faUser} /></button>
                 <button onClick={handleLogout}>Log out</button>
+              </div>
               </>
             )}
           </div>
         </div>
 
+        {shouldShowSearch && (
         <div className={styles.heroText}>
           <h1>Where is your next destination?</h1>
           <div className={styles.searchRow}>
@@ -92,6 +98,7 @@ export function Header({ onSearch }: HeaderProps) {
             />
           </div>
         </div>
+        )}
       </div>
 
       <LoginModal

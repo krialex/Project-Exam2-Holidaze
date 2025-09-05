@@ -34,6 +34,17 @@
   margin-left: 1rem;
 }
 
+.logedInState {
+  display: flex;
+}
+
+.userIcon {
+  font-size: 37px;
+  padding: 0;
+  background-color: inherit;
+  color: #FFF;
+}
+
 .heroText {
   margin-top: 2rem;
   text-align: center;
@@ -84,3 +95,4 @@ button:hover {
 .searchInput:focus {
   outline: none;
 }
+

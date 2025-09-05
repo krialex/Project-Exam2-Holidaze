@@ -12,7 +12,7 @@ interface AllVenuesHtmlProps {
 
 export function AllVenuesHtml({ venues, isLoading, isError }: AllVenuesHtmlProps) {
     if (isLoading) {
-        return <p>Loading venues...</p>;
+        return <div className={styles.spinner} aria-label="Loading spinner"></div>;
     }
 
     if (isError) {

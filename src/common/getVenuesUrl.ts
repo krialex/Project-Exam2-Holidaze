@@ -19,11 +19,23 @@ export function useVenuesApi() {
                 setIsLoading(true);
                 setIsError(false);
 
-                const venuesData = await fetch(venuesUrl);
-                const venuesJson: ApiResponse = await venuesData.json();
+                let allVenues: Venue[] = [];
+                let page = 1;
 
-                console.log(venuesJson);
-                setVenues(venuesJson.data);
+                while (true) {
+                    const response = await fetch(`${venuesUrl}?page=${page}&limit=100`);
+                    if(!response.ok) {
+                        throw new Error(`Feil ved henting av venues (side${page})`);
+                    }
+
+                    const json: ApiResponse = await response.json();
+
+                    if(json.data.length === 0) break;
+                    allVenues = [...allVenues, ...json.data];
+                    page++;
+                }
+
+                setVenues(allVenues);
             } catch (error) {
                 console.log('Feil ved å hente ut venues fra API', error);
                 setIsError(true);
@@ -35,3 +47,26 @@ export function useVenuesApi() {
     }, []);
     return { venues, isLoading, isError };
 }
+
+
+/* DENNE TAR KUN INN DE 100 SIST LAGDE..
+import { useMemo } from "react";
+import { Venue } from "./../../common/types";
+
+type UseFilteredVenuesProps = {
+  venues: Venue[];
+  searchTerm: string;
+};
+
+export function useFilteredVenues({ venues, searchTerm }: UseFilteredVenuesProps) {
+  return useMemo(() => {
+    if (!searchTerm) return venues;
+
+    return venues.filter((venue) =>
+      venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      venue.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [venues, searchTerm]);
+}
+
+ */

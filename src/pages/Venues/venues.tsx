@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export function Venues() {
     const { venue, isLoading, isError } = useVenueIdUrl();
-    if (isLoading) return <p>Loading venues...</p>
-    if (isError) return <p>Something went wrong.. Try again later.</p>
+    if (isLoading) return <div className={styles.spinner} aria-label="Loading spinner"></div>;
+    if (isError) return <p>Something went wrong.. Try again later.</p>;
 
     return (
         <>

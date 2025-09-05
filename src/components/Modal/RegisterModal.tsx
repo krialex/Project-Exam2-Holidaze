@@ -55,7 +55,14 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
           />
           <input
             type="password"
-            placeholder="Your password"
+            placeholder="Your password.."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className={styles.modalInput}
+          />
+                    <input
+            type="password"
+            placeholder="Confirm password.."
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className={styles.modalInput}
