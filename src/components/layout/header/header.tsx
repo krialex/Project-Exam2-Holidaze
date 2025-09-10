@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./header.module.css";
 import { faLocationDot, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -13,13 +13,14 @@ type HeaderProps = {
   onSearch: (term: string) => void;
 };
 
-
 export function Header({ onSearch }: HeaderProps) {
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     function updateUser() {
@@ -54,6 +55,14 @@ export function Header({ onSearch }: HeaderProps) {
     setIsRegisterOpen(true);
   }
 
+  function goToProfile() {
+    if(!user) {
+      setIsLoginOpen(true);
+      return;
+    }
+    navigate("/profile");
+  }
+
   const shouldShowSearch = location.pathname === "/";
 
   return (
@@ -76,7 +85,7 @@ export function Header({ onSearch }: HeaderProps) {
             ) : (
               <>
               <div className={styles.logedInState}>
-                <button className={styles.userIcon}><FontAwesomeIcon icon={faUser} /></button>
+                <button onClick={goToProfile} className={styles.userIcon}><FontAwesomeIcon icon={faUser} /></button>
                 <button onClick={handleLogout}>Log out</button>
               </div>
               </>

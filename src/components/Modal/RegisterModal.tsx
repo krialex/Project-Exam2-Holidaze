@@ -60,13 +60,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
             onChange={(e) => setPassword(e.target.value)}
             className={styles.modalInput}
           />
-                    <input
-            type="password"
-            placeholder="Confirm password.."
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={styles.modalInput}
-          />
+
 
           <label className={styles.checkboxLabel}>
             <input
@@ -87,4 +81,3 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
 
 }
 
-// checkbox: flex items-center gap-2 mb-2
