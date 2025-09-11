@@ -7,6 +7,7 @@ import { save } from "../../../common/auth/localStorage/Save";
 import { load } from "../../../common/auth/localStorage/Load";
 import { RegisterModal } from "../../Modal/RegisterModal";
 import { LoginModal } from "../../Modal/LoginModal"; 
+import { useUser } from "../../../context/UserContext";
 
 
 type HeaderProps = {
@@ -14,7 +15,7 @@ type HeaderProps = {
 };
 
 export function Header({ onSearch }: HeaderProps) {
-  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const { user, setUser, refreshUser } = useUser();
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
@@ -23,29 +24,20 @@ export function Header({ onSearch }: HeaderProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    function updateUser() {
-      const storedUser = load<{ name: string; email: string }>("user");
-      setUser(storedUser);
-    }
-
-    updateUser();
-
-    window.addEventListener("storage", updateUser);
-    return () => window.removeEventListener("storage", updateUser);
-  }, []);
+    refreshUser();
+  }, [refreshUser]);
 
   function handleLogout() {
     save("user", null);
     save("accessToken", null);
     setUser(null);
-    window.dispatchEvent(new Event("storage"));
+    navigate("/");
   }
 
   function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchTerm(e.target.value);
     onSearch(e.target.value);
   }
-
 
   function openLoginModal() {
     setIsLoginOpen(true);

@@ -3,6 +3,10 @@ import { Login } from "../../common/auth/api/Login";
 import styles from "./Modals.module.css";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useUser } from "../../context/UserContext";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "./../../common/validationSchemas";
 
 type LoginModalProps = {
     isOpen: boolean;
@@ -10,20 +14,24 @@ type LoginModalProps = {
 };
 
 export function LoginModal({ isOpen, onClose }: LoginModalProps) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm({
+      resolver: yupResolver(loginSchema),
+    });
+    const { refreshUser } = useUser();
 
     if(!isOpen) return null;
 
-    async function handleLogin(e: React.FormEvent) {
-        e.preventDefault();
+    async function handleLogin(data: any) {
         try {
-            await Login(email, password);
-            setEmail("");
-            setPassword("");
+            await Login(data.email, data.password);
+            await refreshUser();
             onClose();
         } catch (error) {
-            console.log("feil inputs på mail eller passord");
+            console.log("Login failed");
         }
     }
 
@@ -36,21 +44,13 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
         </button>
         <h2>Log in</h2>
         <br />
-        <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            placeholder="Your email.."
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={styles.modalInput}
-          />
-          <input
-            type="password"
-            placeholder="Your password.."
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={styles.modalInput}
-          />
+        <form onSubmit={handleSubmit(handleLogin)}>
+          <input {...register("email")} placeholder="Your email.." className={styles.modalInput} />
+          <p>{errors.email?.message}</p>
+
+          <input {...register("password")} type="password" placeholder="Your password.." className={styles.modalInput} />
+          <p>{errors.password?.message}</p> 
+
           <button type="submit" className={styles.submitBtn}>
             Log in
           </button>
@@ -60,3 +60,4 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
   );
 
 }
+

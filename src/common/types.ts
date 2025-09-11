@@ -3,12 +3,20 @@ export interface Image {
     alt?: string;
 }
 
-/*export interface Review {
-    id: string;
-    username: string;
-    description: string;
-    rating: number;
-} */
+export interface User {
+    name: string;
+    email: string;
+    avatar?: {
+        url: string;
+        alt: string;
+    };
+    bio?: string;
+    venueManager?: boolean;
+    _count: {
+        venues: number;
+        bookings: number;
+    }
+}
 
 export interface Venue {
     id: string;

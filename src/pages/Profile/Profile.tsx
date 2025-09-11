@@ -4,6 +4,88 @@ import { GetProfileByName } from "../../common/auth/api/GetProfileByName";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { EditModal } from "./../../components/Modal/EditModal";
+import { useUser } from "../../context/UserContext";
+import { Navigate } from "react-router-dom";
+
+export function Profile() {
+    const { user, refreshUser } = useUser();
+    const [isLoading, setIsLoading] = useState(true);
+    const [isEditOpen, setIsEditOpen] = useState(false);
+
+    useEffect(() => {
+        async function init() {
+            await refreshUser();
+            setIsLoading(false);
+        }
+        init();
+    }, [refreshUser]);
+
+    if (isLoading) { return <div className={styles.loading}>...Spinner...</div> }
+
+    if (!user) { return <Navigate to="/" replace /> }
+
+     function openEditModal() {
+        setIsEditOpen(true);
+    }
+
+    return (
+        <div className={styles.profileContainer}>
+            <div className={styles.profileInfoWrapper}>
+                <div className={styles.profileImgEdit}>
+                    <img src={user.avatar?.url} alt={user.avatar?.alt} className={styles.profileAvatar} />
+                    <button onClick={openEditModal} className={styles.editBtn}><FontAwesomeIcon icon={faPenToSquare} /></button>
+                </div>
+                <div>
+                    <p>{user.name}</p>
+                    <p>{user.email}</p>
+                </div>
+                <p>{user.bio}</p>
+            </div>
+            <hr />
+            {user.venueManager ? (
+                <ManagerProfile profile={user} />
+            ) : (
+                <CostumerProfile profile={user} />
+            )}
+
+            <EditModal
+                isOpen={isEditOpen}
+                onClose={() => {
+                setIsEditOpen(false);
+                }}
+            />
+        </div>
+    );
+}
+
+function ManagerProfile({ profile }: { profile: any }) {
+    return (
+        <div className={styles.managerSection}>
+            <button className={styles.newVenueBtn}>Create a new venue</button>
+            <h3>My venues</h3>
+            <p>{profile._count.venues}</p>
+        </div>
+    );
+}
+
+function CostumerProfile({ profile }: { profile: any }) {
+    return (
+        <div className={styles.costumerSection}>
+            <h3>My bookings</h3>
+            <p>{profile._count.bookings}</p>
+        </div>
+    );
+}
+
+/**
+ * import styles from "./profile.module.css";
+import { useEffect, useState } from "react";
+import { GetProfileByName } from "../../common/auth/api/GetProfileByName";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { EditModal } from "./../../components/Modal/EditModal";
+import { useUser } from "../../context/UserContext";
+import { Navigate } from "react-router-dom";
 
 export function Profile() {
     const [profile, setProfile] = useState<any>(null);
@@ -91,3 +173,4 @@ function CostumerProfile({ profile }: { profile: any }) {
         </div>
     );
 }
+ */

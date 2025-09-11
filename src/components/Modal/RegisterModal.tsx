@@ -3,6 +3,11 @@ import { Register } from "../../common/auth/api/Register";
 import styles from "./Modals.module.css";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useUser } from "../../context/UserContext";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registerSchema } from "./../../common/validationSchemas";
+import { Login } from "../../common/auth/api/Login";
 
 type RegisterModalProps = {
     isOpen: boolean;
@@ -10,25 +15,27 @@ type RegisterModalProps = {
 };
 
 export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [isManager, setIsManager] = useState(false);
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm({
+      resolver: yupResolver(registerSchema),
+    });
+    const { refreshUser } = useUser();
 
     if(!isOpen) return null;
 
-    async function handleRegister(e: React.FormEvent) {
-        e.preventDefault();
-        try {
-            await Register(name, email, password, isManager);
-            setName("");
-            setEmail("");
-            setPassword("");
-            onClose();
-        } catch (error) {
-            console.log("feil inputs på navn, mail eller passord");
-        }
+     async function handleRegister(data: any) {
+    try {
+      await Register(data.name, data.email, data.password, data.isManager);
+      await Login(data.email, data.password);
+      await refreshUser();
+      onClose();
+    } catch (error) {
+      console.log("Registration failed");
     }
+  }
 
     return (
         <>
@@ -38,39 +45,21 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
             <FontAwesomeIcon icon={faXmark} />
         </button>
         <h2>Register</h2>
-        <form onSubmit={handleRegister}>
-          <input
-            type="name"
-            placeholder="Your name.."
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className={styles.modalInput}
-          />  
-          <input
-            type="email"
-            placeholder="Your email.."
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={styles.modalInput}
-          />
-          <input
-            type="password"
-            placeholder="Your password.."
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={styles.modalInput}
-          />
+        <form onSubmit={handleSubmit(handleRegister)}>
+          <input {...register("name")} placeholder="Your name.." className={styles.modalInput} />  
+          <p>{errors.name?.message}</p>
 
+          <input {...register("email")} placeholder="Your email.." className={styles.modalInput} />
+          <p>{errors.email?.message}</p>
+
+          <input {...register("password")} type="password" placeholder="Your password.." className={styles.modalInput} />
+          <p>{errors.password?.message}</p>
 
           <label className={styles.checkboxLabel}>
-            <input
-              type="checkbox"
-              checked={isManager}
-              onChange={(e) => setIsManager(e.target.checked)}
-              className={styles.checkbox}
-            />
+            <input type="checkbox" {...register("isManager")} className={styles.checkbox} />
             Register as Manager
           </label>
+
           <button type="submit" className={styles.submitBtn}>
             Register
           </button>
@@ -80,4 +69,5 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
   );
 
 }
+
 

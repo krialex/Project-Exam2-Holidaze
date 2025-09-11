@@ -3,6 +3,10 @@ import { UpdateProfile } from "../../common/auth/api/UpdateProfile";
 import styles from "./Modals.module.css";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useUser } from "../../context/UserContext";
+import { editProfileSchema } from "./../../common/validationSchemas";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 
 type EditModalProps = {
@@ -11,21 +15,25 @@ type EditModalProps = {
 };
 
 export function EditModal({ isOpen, onClose}: EditModalProps) {
-    const [avatar, setAvatar] = useState("");
-    const [bio, setBio] = useState("");
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm({
+      resolver: yupResolver(editProfileSchema),
+    });
+    const { refreshUser } = useUser();
 
     if (!isOpen) return null;
 
-    async function updateUser(e: React.FormEvent) {
-        e.preventDefault();
+    async function updateUser(data: any) {
         try {
-            await UpdateProfile({ url: avatar, alt: "User avatar" }, bio);
-            setBio("");
-            setAvatar("");
+            await UpdateProfile({ url: data.avatarUrl, alt: data.avatarAlt || "" }, data.bio);
+            await refreshUser();
+   
             onClose();
-            window.location.reload();
         } catch (error) {
-            console.log("feil inputs på bio eller avatar");
+            console.log("Update user info failed");
         }
     }
 
@@ -38,21 +46,13 @@ export function EditModal({ isOpen, onClose}: EditModalProps) {
         </button>
         <h2>Update your profile</h2>
         <br />
-        <form onSubmit={updateUser}>
-            <input 
-                type="bio"
-                placeholder="update bio.."
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                className={styles.modalInput}
-            />
-            <input 
-                type="avatar"
-                placeholder="update avatar url.."
-                value={avatar}
-                onChange={(e) => setAvatar(e.target.value)}
-                className={styles.modalInput}
-            />
+        <form onSubmit={handleSubmit(updateUser)}>
+          <input {...register("bio")} placeholder="Tell everyone about you.." className={styles.modalInput} />  
+          <p>{errors.bio?.message}</p>
+
+          <input {...register("avatarUrl")} placeholder="Update your avatar with an url.." className={styles.modalInput} />  
+          <p>{errors.avatarUrl?.message}</p>
+
             <button type="submit" className={styles.submitBtn}>
             Update
           </button>
@@ -61,3 +61,4 @@ export function EditModal({ isOpen, onClose}: EditModalProps) {
         </>
     )
 }
+

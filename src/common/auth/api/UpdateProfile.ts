@@ -34,7 +34,7 @@ export async function UpdateProfile(avatar: Avatar, bio: string) {
 
     const data = await response.json();
 
-    console.log("dette er oppdatert: ", data);
+    //console.log("dette er oppdatert: ", data);
 
-    return data;
+    return data.data;
 }

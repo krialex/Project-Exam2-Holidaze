@@ -3,7 +3,6 @@ import { load } from "../localStorage/Load";
 
 export async function GetProfileByName() {
     const user = load<{ name: string }>("user");
-
     if(!user) throw new Error ("no loged-in user found");
 
     const token = load<string>("accessToken");
@@ -22,7 +21,7 @@ export async function GetProfileByName() {
     if (!response) throw new Error ("Failed to fetch profile from api");
 
     const data = await response.json();
-    console.log("dette er profilen fra api som er logget inn: ", data); 
+    //console.log("dette er profilen fra api som er logget inn: ", data); 
 
     return data.data;
 }

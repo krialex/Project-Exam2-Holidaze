@@ -26,9 +26,6 @@ export async function Register(name: string, email: string, password: string, ma
         name: data.data.name, 
         email: data.data.email, 
         manager: data.data.venueManager });
-
-    console.log("Dette er data registrert på registrer: ", data);
-
-    window.dispatchEvent(new Event("storage"));
+        
     return data;
 }

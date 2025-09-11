@@ -25,8 +25,5 @@ export async function Login(email: string, password: string, manager?: boolean) 
     email: data.data.email, 
     manager: data.data.venueManager });
 
-  console.log("Dette er login data: ", data.data.venueManager);
-
-  window.dispatchEvent(new Event("storage")); 
   return data;
 }
