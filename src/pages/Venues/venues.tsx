@@ -2,7 +2,7 @@ import { useVenueIdUrl } from "../../common/getVenueIdUrl";
 import styles from "./venues.module.css";
 import { faCheck, faX, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { Calendar } from "../../components/Search/Calender";
 
 export function Venues() {
     const { venue, isLoading, isError } = useVenueIdUrl();
@@ -70,7 +70,7 @@ export function Venues() {
                             <button className={styles.bookingBtn}>Book your adventure here</button>
                         </div>
                     </div>
-
+                <Calendar bookings={venue.bookings ?? []} />
                 </div>
                 
             </div>

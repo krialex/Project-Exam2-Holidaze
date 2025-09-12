@@ -36,10 +36,14 @@ export function Profile() {
                     <button onClick={openEditModal} className={styles.editBtn}><FontAwesomeIcon icon={faPenToSquare} /></button>
                 </div>
                 <div>
-                    <p>{user.name}</p>
+                    <p className={styles.name}>{user.name}</p>
+                    <p className={styles.aboutMe}>Contact me:</p>
                     <p>{user.email}</p>
                 </div>
-                <p>{user.bio}</p>
+                <div>
+                    <p className={styles.aboutMe}>About me:</p>
+                    <p>{user.bio}</p>
+                </div>
             </div>
             <hr />
             {user.venueManager ? (

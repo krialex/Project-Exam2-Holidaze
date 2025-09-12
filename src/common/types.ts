@@ -47,4 +47,19 @@ export interface Venue {
         pets: boolean;
         /* her kan jeg legge til fler om jeg vil */
     }
+    bookings?: Booking[];
+}
+
+export interface ApiResponse {
+  data: Venue; 
+}
+export interface CalendarProps {
+    //id: string;
+    bookings?: Booking[];
+}
+
+export interface Booking {
+    id: string;
+    dateFrom: string;
+    dateTo: string;
 }

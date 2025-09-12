@@ -14,10 +14,20 @@ hr {
 
 .profileInfoWrapper {
     display: flex;
+    max-width: 788px;
     align-items: center;
     gap: 3rem;
     padding: 5px;
     margin: 10px auto;
+}
+
+.aboutMe {
+    font-size: .9rem;
+    font-style: italic;
+}
+
+.name {
+    font-weight: bold;
 }
 
 .profileImgEdit {

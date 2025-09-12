@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {BASE_API_URL, ALL_VENUES } from "./url";
 import { Venue } from "./types";
+import { ApiResponse } from "./types";
 
-interface ApiResponse {
-  data: Venue; 
-}
 
 export function useVenueIdUrl() {
   const { id } = useParams();
@@ -19,10 +17,10 @@ export function useVenueIdUrl() {
         setIsLoading(true);
         setIsError(false);
 
-        const response = await fetch(`${BASE_API_URL}${ALL_VENUES}/${id}`);
-        const json: ApiResponse = await response.json();
+        const response = await fetch(`${BASE_API_URL}${ALL_VENUES}/${id}?_bookings=true`);
+        if(!response.ok) throw new Error("Failed to fetch venue");
 
-        console.log(json.data);
+        const json: ApiResponse = await response.json();
         setVenue(json.data);
       } catch (error) {
         console.error("Feil ved å hente ut venue fra API", error);
@@ -32,9 +30,7 @@ export function useVenueIdUrl() {
       }
     }
 
-    if (id) {
-      getVenueId();
-    }
+    if (id) getVenueId();
   }, [id]);
 
   return { venue, isLoading, isError };
