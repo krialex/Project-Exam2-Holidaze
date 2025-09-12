@@ -19,24 +19,19 @@ export function useVenuesApi() {
                 setIsLoading(true);
                 setIsError(false);
 
-                let allVenues: Venue[] = [];
-                let page = 1;
+                let lastVenues: Venue[] = [];
 
-                while (true) {
-                    const response = await fetch(`${venuesUrl}?page=${page}&limit=100`);
-                    if(!response.ok) {
-                        throw new Error(`Feil ved henting av venues (side${page})`);
-                    }
-
-                    const json: ApiResponse = await response.json();
-                    console.log("dette er alle api: ", json.data)
-
-                    if(json.data.length === 0) break;
-                    allVenues = [...allVenues, ...json.data];
-                    page++;
+               for (let page = 1; page <= 2; page++) {
+                const response = await fetch(`${venuesUrl}?page=${page}&limit=100`);
+                if (!response.ok) {
+                    throw new Error(`Feil ved henting av venues (side ${page})`);
                 }
 
-                setVenues(allVenues);
+                    const json: ApiResponse = await response.json();
+                    lastVenues = [...lastVenues, ...json.data];
+                }
+
+                setVenues(lastVenues);
             } catch (error) {
                 console.log('Feil ved å hente ut venues fra API', error);
                 setIsError(true);
