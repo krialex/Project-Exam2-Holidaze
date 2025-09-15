@@ -1,5 +1,4 @@
 import { useVenuesApi } from "../../common/getVenuesUrl";
-import styles from "./home.module.css";
 import { AllVenuesHtml } from "./../../components/VenuesHtml/AllVenuesHtml";
 import { useFilteredVenues } from "./../../components/Search/Search"; 
 import { useOutletContext } from "react-router-dom";
@@ -13,9 +12,8 @@ export function Home() {
   const filteredVenues = useFilteredVenues({ venues, searchTerm });
 
   return (
-    <div className={styles.venuesContainerPage}>
-      <h2>Browse our venues</h2>
-
+    <div className="max-w-7xl mx-auto px-4 py-6">
+      <h2 className="text-3xl font-bold mb-6 text-center">Browse our venues</h2>
       <AllVenuesHtml
         venues={filteredVenues}
         isLoading={isLoading}
@@ -24,3 +22,5 @@ export function Home() {
     </div>
   );
 }
+
+

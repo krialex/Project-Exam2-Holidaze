@@ -1,6 +1,8 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Layout } from './components/layout/layout';
 import { Home } from './pages/Home/home';
@@ -18,7 +20,16 @@ function App() {
       
         <Route path="/profile" element={<Profile />} />
       </Route>
-    </Routes>  
+    </Routes> 
+    <ToastContainer 
+        position="top-center" 
+        autoClose={3000} 
+        hideProgressBar={false} 
+        newestOnTop={true} 
+        closeOnClick 
+        pauseOnHover
+        theme="colored"
+      /> 
     </>
   )
 }

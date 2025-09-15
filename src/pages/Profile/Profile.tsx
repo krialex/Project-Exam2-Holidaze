@@ -20,7 +20,9 @@ export function Profile() {
         init();
     }, [refreshUser]);
 
-    if (isLoading) { return <div className={styles.loading}>...Spinner...</div> }
+    if (isLoading) {
+         return <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto my-8" aria-label="Loading spinner"></div> 
+        }
 
     if (!user) { return <Navigate to="/" replace /> }
 
@@ -28,25 +30,43 @@ export function Profile() {
         setIsEditOpen(true);
     }
 
-    return (
-        <div className={styles.profileContainer}>
-            <div className={styles.profileInfoWrapper}>
-                <div className={styles.profileImgEdit}>
-                    <img src={user.avatar?.url} alt={user.avatar?.alt} className={styles.profileAvatar} />
-                    <button onClick={openEditModal} className={styles.editBtn}><FontAwesomeIcon icon={faPenToSquare} /></button>
-                </div>
-                <div>
-                    <p className={styles.name}>{user.name}</p>
-                    <p className={styles.aboutMe}>Contact me:</p>
-                    <p>{user.email}</p>
-                </div>
-                <div>
-                    <p className={styles.aboutMe}>About me:</p>
-                    <p>{user.bio}</p>
-                </div>
+    const avatarUrl = user.avatar?.url || "/img/default-avatar.png";
+
+    return ( 
+        <div className="max-w-3xl mx-auto flex flex-col gap-6">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 bg-white rounded-xl shadow-md p-4 mt-4">
+
+            <div className="flex flex-row items-center gap-3 sm:gap-4">
+            <div className="relative shrink-0">
+                <img
+                src={avatarUrl}
+                alt={user.avatar?.alt || "User avatar"}
+                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full shadow-lg ring-1 ring-gray-200"
+                />
+                <button
+                onClick={openEditModal}
+                className="absolute top-10 sm:top-12 right-[-8px] bg-transparent hover:text-indigo-600"
+                >
+                <FontAwesomeIcon icon={faPenToSquare} />
+                </button>
             </div>
-            <hr />
-            {user.venueManager ? (
+            <div className="flex flex-col gap-0.5 min-w-0">
+                <p className="font-bold text-base sm:text-lg truncate">{user.name}</p>
+                <p className="italic text-xs sm:text-sm">Contact me:</p>
+                <p className="break-all text-sm">{user.email}</p>
+            </div>
+            </div>
+
+            <div className="flex flex-col gap-1 min-w-[150px] sm:text-left sm:items-center">
+            <p className="italic text-xs sm:text-sm">About me:</p>
+            <p className="max-w-[250px] text-sm sm:text-base">{user.bio}</p>
+            </div>
+        </div>
+
+        <hr className="border-t border-gray-300 my-4 opacity-50" />
+
+        {/* Manager or Customer Info */}
+           {user.venueManager ? (
                 <ManagerProfile profile={user} />
             ) : (
                 <CostumerProfile profile={user} />
@@ -58,123 +78,28 @@ export function Profile() {
                 setIsEditOpen(false);
                 }}
             />
-        </div>
+        </div> 
+
     );
 }
 
 function ManagerProfile({ profile }: { profile: any }) {
     return (
-        <div className={styles.managerSection}>
-            <button className={styles.newVenueBtn}>Create a new venue</button>
-            <h3>My venues</h3>
-            <p>{profile._count.venues}</p>
+        <div className="flex flex-col gap-2 mx-auto my-6">
+            <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Create a new venue</button>
+            <h3 className="text-lg font-semibold text-center">My venues</h3>
+            <p className="text-center">{profile._count.venues}</p>
         </div>
     );
 }
 
 function CostumerProfile({ profile }: { profile: any }) {
     return (
-        <div className={styles.costumerSection}>
-            <h3>My bookings</h3>
-            <p>{profile._count.bookings}</p>
+        <div className="flex flex-col gap-2 mx-auto my-6">
+            <h3 className="text-lg font-semibold text-center">My bookings</h3>
+            <p className="text-center">{profile._count.bookings}</p>
         </div>
-    );
+    )
 }
 
-/**
- * import styles from "./profile.module.css";
-import { useEffect, useState } from "react";
-import { GetProfileByName } from "../../common/auth/api/GetProfileByName";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { EditModal } from "./../../components/Modal/EditModal";
-import { useUser } from "../../context/UserContext";
-import { Navigate } from "react-router-dom";
 
-export function Profile() {
-    const [profile, setProfile] = useState<any>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const [isEditOpen, setIsEditOpen] = useState(false);
-
-    useEffect(() => {
-        async function fetchProfile() {
-            try {
-                const data = await GetProfileByName();
-                setProfile(data);
-            } catch (error) {
-                setError("failed to fetch profile");
-                console.log(error, "kunne ikke hente profilen..");
-            } finally {
-                setIsLoading(false); //må sette loading spinner da
-            }
-        }
- 
-        fetchProfile();
-    }, []);
-
-    if (isLoading) {
-    return <div className={styles.loading}>...Spinner...</div>
-    }
-
-    if (error) {
-        return <div className={styles.error}>{error}</div>
-    }
-
-    if (!profile) {
-    return <div className={styles.error}>No profile found</div>
-    }
-
-     function openEditModal() {
-        setIsEditOpen(true);
-    }
-
-    return (
-        <div className={styles.profileContainer}>
-            <div className={styles.profileInfoWrapper}>
-                <div className={styles.profileImgEdit}>
-                    <img src={profile.avatar.url} alt={profile.avatar.alt} className={styles.profileAvatar} />
-                    <button onClick={openEditModal} className={styles.editBtn}><FontAwesomeIcon icon={faPenToSquare} /></button>
-                </div>
-                <div>
-                    <p>{profile.name}</p>
-                    <p>{profile.email}</p>
-                </div>
-                <p>{profile.bio}</p>
-            </div>
-            <hr />
-            {profile.venueManager ? (
-                <ManagerProfile profile={profile} />
-            ) : (
-                <CostumerProfile profile={profile} />
-            )}
-
-            <EditModal
-                isOpen={isEditOpen}
-                onClose={() => {
-                setIsEditOpen(false);
-                }}
-            />
-        </div>
-    );
-}
-
-function ManagerProfile({ profile }: { profile: any }) {
-    return (
-        <div className={styles.managerSection}>
-            <button className={styles.newVenueBtn}>Create a new venue</button>
-            <h3>My venues</h3>
-            <p>{profile._count.venues}</p>
-        </div>
-    );
-}
-
-function CostumerProfile({ profile }: { profile: any }) {
-    return (
-        <div className={styles.costumerSection}>
-            <h3>My bookings</h3>
-            <p>{profile._count.bookings}</p>
-        </div>
-    );
-}
- */

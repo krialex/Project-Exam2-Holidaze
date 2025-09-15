@@ -1,5 +1,4 @@
 import React, { useState} from "react";
-import styles from "./Modals.module.css";
 import { load } from "../../common/auth/localStorage/Load";
 import { BASE_API_URL, ALL_BOOKINGS } from "../../common/url";
 import { useUser } from "../../context/UserContext";
@@ -54,7 +53,7 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
             }),
         });
 
-        const data = await res.json();
+        //const data = await res.json();
 
         if (res.ok) {
             alert("booking successfull"); //her bytte ut til toast, og en oppdatering av siden.
@@ -64,28 +63,71 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
         }
     } catch (err) {
         console.error(err);
-        alert("something went wrong in booking to api.");
+        alert("something went wrong when booking. Please try again later.");
     }
   };
 
    return (
-    <div className={styles.overlay}>
-      <div className={styles.container}>
-        <button onClick={onClose} className={styles.closeIcon}>X</button>
-        <h2>Confirm Booking</h2>
-        <p>Venue: {venueName}</p>
-        <p>From: {startDate?.toLocaleDateString()}</p>
-        <p>To: {endDate?.toLocaleDateString()}</p>
-
-        <div className={styles.guestSelector}>
-          <button onClick={decrementGuests} disabled={guests <= 1}>-</button>
-          <input type="text" readOnly value={guests} />
-          <button onClick={incrementGuests} disabled={guests >= maxGuests}>+</button>
-          <small>Max {maxGuests} guests</small>
+    <>
+      <div
+        className="fixed inset-0 bg-black bg-opacity-50 z-40"
+        onClick={onClose}
+      ></div>
+      <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition"
+        >
+          ✕
+        </button>
+        <h2 className="text-xl font-semibold text-center mb-4">
+          Confirm Booking
+        </h2>
+        <div className="space-y-2 text-gray-700 mb-4">
+          <p>
+            <span className="font-medium">Venue:</span> {venueName}
+          </p>
+          <p>
+            <span className="font-medium">From:</span>{" "}
+            {startDate?.toLocaleDateString()}
+          </p>
+          <p>
+            <span className="font-medium">To:</span>{" "}
+            {endDate?.toLocaleDateString()}
+          </p>
+        </div>
+        <div className="flex items-center justify-center gap-3 bg-gray-50 rounded-lg shadow-inner py-3 mb-4">
+          <button
+            onClick={decrementGuests}
+            disabled={guests <= 1}
+            className="px-3 py-1 bg-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-300"
+          >
+            –
+          </button>
+          <input
+            type="text"
+            readOnly
+            value={guests}
+            className="w-12 text-center border rounded-md"
+          />
+          <button
+            onClick={incrementGuests}
+            disabled={guests >= maxGuests}
+            className="px-3 py-1 bg-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-300"
+          >
+            +
+          </button>
+          <small className="text-gray-500">Max {maxGuests}</small>
         </div>
 
-        <button onClick={handleConfirmBooking}>Book Now</button>
+        <button
+          onClick={handleConfirmBooking}
+          className="w-full bg-green-600 text-white py-2 rounded-lg shadow-md hover:bg-green-700 transition"
+        >
+          Book Now
+        </button>
       </div>
-    </div>
+    </>
   );
 }
+
