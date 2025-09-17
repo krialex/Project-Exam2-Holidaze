@@ -6,6 +6,7 @@ import { useUser } from "../../context/UserContext";
 import { editProfileSchema } from "./../../common/validationSchemas";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 
 
 type EditModalProps = {
@@ -29,10 +30,11 @@ export function EditModal({ isOpen, onClose}: EditModalProps) {
         try {
             await UpdateProfile({ url: data.avatarUrl, alt: data.avatarAlt || "" }, data.bio);
             await refreshUser();
-   
+
+            toast.success("Profile updated!")
             onClose();
         } catch (error) {
-            console.log("Update user info failed");
+            toast.error("Update user info failed");
         }
     }
 

@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import { load } from "../../common/auth/localStorage/Load";
 import { BASE_API_URL, ALL_BOOKINGS } from "../../common/url";
 import { useUser } from "../../context/UserContext";
+import { toast } from "react-toastify";
 
 type BookingModalProps = {
     isOpen: boolean;
@@ -31,7 +32,7 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
     if (!startDate || !endDate) return;
 
         if (!user) {
-            alert("You must be logged in to book this venue.");
+            toast.error("You must be logged in to book this venue.");
             return;
             }
 
@@ -56,14 +57,14 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
         //const data = await res.json();
 
         if (res.ok) {
-            alert("booking successfull"); //her bytte ut til toast, og en oppdatering av siden.
+            toast.success("booking successful!");
             onClose();
         } else {
-            alert("You need to be logged in to book a venue");
+            toast.error("Booking failed, please try again.");
         }
     } catch (err) {
         console.error(err);
-        alert("something went wrong when booking. Please try again later.");
+        toast.error("something went wrong when booking. Please try again later.");
     }
   };
 

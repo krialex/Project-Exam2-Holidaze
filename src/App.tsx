@@ -22,13 +22,15 @@ function App() {
       </Route>
     </Routes> 
     <ToastContainer 
-        position="top-center" 
+        position="bottom-right" 
         autoClose={3000} 
         hideProgressBar={false} 
         newestOnTop={true} 
         closeOnClick 
         pauseOnHover
+        draggable
         theme="colored"
+        toastClassName="rounded-lg shadow-lg bg-white text-black px-4 py-2"
       /> 
     </>
   )
