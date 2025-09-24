@@ -68,7 +68,7 @@ export function EditModal({ isOpen, onClose}: EditModalProps) {
                   className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
                 />
                 {errors.bio && (
-                  <p className="text-red-500 text-xs mt-1">{errors.bio.message}</p>
+                  <p className="text-xs text-red-600 italic">{errors.bio.message}</p>
                 )}
               </div>
 
@@ -79,7 +79,7 @@ export function EditModal({ isOpen, onClose}: EditModalProps) {
                   className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
                 />
                 {errors.avatarUrl && (
-                  <p className="text-red-500 text-xs mt-1">
+                  <p className="text-xs text-red-600 italic">
                     {errors.avatarUrl.message}
                   </p>
                 )}
@@ -96,4 +96,4 @@ export function EditModal({ isOpen, onClose}: EditModalProps) {
         </>
     )
 }
-
+ 

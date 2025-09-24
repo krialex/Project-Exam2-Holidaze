@@ -1,28 +1,56 @@
-import styles from "./profile.module.css";
 import { useEffect, useState } from "react";
-import { GetProfileByName } from "../../common/auth/api/GetProfileByName";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { EditModal } from "./../../components/Modal/EditModal";
 import { useUser } from "../../context/UserContext";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+
+import { GetBookingsByProfile } from "../../common/auth/api/GetApiProfile/GetBookingsByProfile";
+import { GetVenuesByProfile } from "../../common/auth/api/GetApiProfile/GetVenuesByProfile";
+import moment from "moment";
 
 export function Profile() {
     const { user, refreshUser } = useUser();
     const [isLoading, setIsLoading] = useState(true);
     const [isEditOpen, setIsEditOpen] = useState(false);
+    const [bookings, setBookings] = useState<any[]>([]);
+    const [venuesWithBookings, setVenuesWithBookings] = useState<any[]>([]);
+    const [isError, setIsError] = useState<string | null>(null);
 
     useEffect(() => {
-        async function init() {
-            await refreshUser();
-            setIsLoading(false);
+    async function loadData() {
+        if (!user) {
+        setIsLoading(false);
+        return;
         }
-        init();
-    }, [refreshUser]);
+
+        setIsLoading(true);
+        setIsError(null);
+
+        try {
+        if (user.venueManager) {
+            const venues = await GetVenuesByProfile();
+            setVenuesWithBookings(venues);  
+        } else {
+            const myBookings = await GetBookingsByProfile();
+            setBookings(myBookings);
+        }
+        } catch (err: any) {
+        console.error(err);
+        setIsError("Kunne ikke fetche bookings eller venues.");
+        } finally {
+        setIsLoading(false);
+        }
+    }
+
+        loadData();
+    }, [user]);
+
 
     if (isLoading) {
          return <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto my-8" aria-label="Loading spinner"></div> 
         }
+    if(isError) return <div className="text-red-500">{isError}</div>
 
     if (!user) { return <Navigate to="/" replace /> }
 
@@ -67,9 +95,9 @@ export function Profile() {
 
         {/* Manager or Customer Info */}
            {user.venueManager ? (
-                <ManagerProfile profile={user} />
+                <ManagerProfile profile={user} venues={venuesWithBookings} />
             ) : (
-                <CostumerProfile profile={user} />
+                <CostumerProfile profile={user} bookings={bookings} />
             )}
 
             <EditModal
@@ -83,23 +111,47 @@ export function Profile() {
     );
 }
 
-function ManagerProfile({ profile }: { profile: any }) {
+function ManagerProfile({ profile, venues }: { profile: any; venues: any[] }) {
     return (
         <div className="flex flex-col gap-2 mx-auto my-6">
             <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Create a new venue</button>
             <h3 className="text-lg font-semibold text-center">My venues</h3>
-            <p className="text-center">{profile._count.venues}</p>
+            
+            {venues.length === 0 ? (
+                <p>No venues yet</p>
+            ) : (
+                venues.map((v) => (
+                    <div key={v.id} className="p-3 mb-2 bg-white rounded shadow">
+                        <p className="font-medium">{v.name}</p>
+                        <p className="text-sm text-gray-600">{v.bookings?.length ?? 0} bookings</p>
+                    </div>
+                ))
+            )}
         </div>
     );
 }
 
-function CostumerProfile({ profile }: { profile: any }) {
+function CostumerProfile({ profile, bookings }: { profile: any; bookings: any[] }) {
     return (
         <div className="flex flex-col gap-2 mx-auto my-6">
             <h3 className="text-lg font-semibold text-center">My bookings</h3>
-            <p className="text-center">{profile._count.bookings}</p>
+            
+            {bookings.length === 0 ? (
+                <p>No bookings yet</p>
+            ) : (
+                bookings.map((b) => (
+                    <Link key={b.id} to={`/venues/${b.venue?.id}`}>
+                    <div className="p-4 mb-2 bg-white rounded shadow">
+                        <p className="font-medium">{b.venue?.name ?? "Unknown venue"}</p>
+                        <p className="text-sm">{moment(b.dateFrom).format("DD.MM.YYYY")} – {moment(b.dateTo).format("DD.MM.YYYY")}</p>
+                        <p className="text-sm">{b.guests} guests</p>
+
+                    </div>
+                    </Link>
+                ))
+            )}
         </div>
-    )
+    );
 }
 
 

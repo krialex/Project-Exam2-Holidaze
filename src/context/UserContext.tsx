@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
 import { load } from "../common/auth/localStorage/Load";
 import { save } from "../common/auth/localStorage/Save";
-import { GetProfileByName } from "../common/auth/api/GetProfileByName";
+import { GetProfileByName } from "../common/auth/api/GetApiProfile/GetProfileByName";
 import type { User } from "../common/types";
 
 type UserContextType = {
