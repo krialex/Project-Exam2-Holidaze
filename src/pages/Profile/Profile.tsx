@@ -8,6 +8,7 @@ import { Link, Navigate } from "react-router-dom";
 import { GetBookingsByProfile } from "../../common/auth/api/GetApiProfile/GetBookingsByProfile";
 import { GetVenuesByProfile } from "../../common/auth/api/GetApiProfile/GetVenuesByProfile";
 import moment from "moment";
+import { NewVenueModal } from "../../components/Modal/NewVenueModal";
 
 export function Profile() {
     const { user, refreshUser } = useUser();
@@ -112,21 +113,30 @@ export function Profile() {
 }
 
 function ManagerProfile({ profile, venues }: { profile: any; venues: any[] }) {
+    const [isNewVenueOpen, setIsNewVenueOpen] = useState(false);
+
     return (
         <div className="flex flex-col gap-2 mx-auto my-6">
-            <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Create a new venue</button>
+            <button onClick={() => setIsNewVenueOpen(true)} className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Create a new venue</button>
             <h3 className="text-lg font-semibold text-center">My venues</h3>
             
             {venues.length === 0 ? (
                 <p>No venues yet</p>
             ) : (
                 venues.map((v) => (
-                    <div key={v.id} className="p-3 mb-2 bg-white rounded shadow">
+                    <Link key={v.id} to={`/venues/${v.id}`}>
+                    <div className="p-3 mb-2 bg-white rounded shadow">
                         <p className="font-medium">{v.name}</p>
                         <p className="text-sm text-gray-600">{v.bookings?.length ?? 0} bookings</p>
                     </div>
+                    </Link>
                 ))
             )}
+
+            <NewVenueModal 
+                isOpen={isNewVenueOpen}
+                onClose={() => setIsNewVenueOpen(false)}
+            />
         </div>
     );
 }

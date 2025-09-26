@@ -44,23 +44,15 @@ export function EditModal({ isOpen, onClose}: EditModalProps) {
             className="fixed inset-0 bg-black bg-opacity-50 z-40"
             onClick={onClose}
           ></div>
-
           <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6">
-
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition"
-            >
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition">
               <FontAwesomeIcon icon={faXmark} />
             </button>
+            <h2 className="text-xl font-semibold text-center mb-4">Update your profile</h2>
 
-            <h2 className="text-xl font-semibold text-center mb-4">
-              Update your profile</h2>
-
-            <form
-              onSubmit={handleSubmit(updateUser)}
-              className="flex flex-col gap-4 bg-gray-50 rounded-lg p-4 shadow-inner"
-            >
+            <form onSubmit={handleSubmit(updateUser)} className="flex flex-col gap-4 bg-gray-50 rounded-lg p-4 shadow-inner">
               <div>
                 <input
                   {...register("bio")}
@@ -87,8 +79,7 @@ export function EditModal({ isOpen, onClose}: EditModalProps) {
 
               <button
                 type="submit"
-                className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition shadow-md w-1/2 mx-auto"
-              >
+                className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition shadow-md w-1/2 mx-auto">
                 Update
               </button>
             </form>
