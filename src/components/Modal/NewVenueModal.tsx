@@ -89,7 +89,7 @@ export function NewVenueModal({ isOpen, onClose }: venueModalProps) {
             reset();
             onClose();
         } catch(err) {
-            console.log("noe gikk galt i forsøket om å lage en ny venue", err);
+            console.log("Something went wrong in creating a new venue: ", err);
             toast.error("Could not create new venue");
         }
     }
@@ -97,14 +97,14 @@ export function NewVenueModal({ isOpen, onClose }: venueModalProps) {
     return (
         <>
         <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={onClose}></div>
-         <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-lg -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6">
+         <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-lg -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl flex flex-col">
             <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition">
                 <FontAwesomeIcon icon={faXmark} />
             </button>
-            <h2 className="text-xl font-semibold text-center mb-4">Create a new venue</h2>
+            <h2 className="text-xl font-semibold text-center mb-4 mt-6">Create a new venue</h2>
 
             <FormProvider {... methods}>
-                    <form onSubmit={handleSubmit(createVenue)} className="flex flex-col gap-4 bg-gray-50 rounded-lg p-4 shadow-inner">
+                    <form onSubmit={handleSubmit(createVenue)} className="flex flex-col gap-4 bg-gray-50 rounded-lg p-4 shadow-inner overflow-y-auto" style={{ maxHeight: "80vh" }}>
                     <input 
                         {...register("name")}
                         placeholder="Venue name"
@@ -168,4 +168,3 @@ export function NewVenueModal({ isOpen, onClose }: venueModalProps) {
 }
 
 
- 
