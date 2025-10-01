@@ -19,7 +19,7 @@ const newVenueSchema = yup.object().shape({
   name: yup.string().required("Name is required"),
   description: yup.string().required("Description is required"),
   price: yup.number().min(1, "Price must be positive").required("Price is required"),
-  rating: yup.number().min(0).max(6).default(0),
+  rating: yup.number().min(0).max(5).default(0),
   maxGuests: yup.number().min(1).max(100, "Guests between 1–100").required(),
   address: yup.string().nullable(),
   city: yup.string().nullable(),
@@ -153,7 +153,7 @@ export function NewVenueModal({ isOpen, onClose }: venueModalProps) {
                         <label><input type="checkbox" {...register("pets")} /> Pets</label>
                     </div>
 
-                    <StarRating name="rating" maxStars={6} />
+                    <StarRating name="rating" maxStars={5} />
 
 
                     <button type="submit" className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition shadow-md w-1/2 mx-auto">

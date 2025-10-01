@@ -8,7 +8,7 @@ export async function GetVenuesByProfile() {
     const token = load<string>("accessToken");
     if (!token) throw new Error("No access token found");
 
-    const url = `${BASE_API_URL}${ALL_PROFILES}/${user.name}/venues?_bookings=true`;
+    const url = `${BASE_API_URL}${ALL_PROFILES}/${user.name}/venues?_bookings=true&_venue=true&_customer=true`;
 
     const res = await fetch(url, {
         method: "GET",
