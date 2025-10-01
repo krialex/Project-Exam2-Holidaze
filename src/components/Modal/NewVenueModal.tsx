@@ -45,7 +45,6 @@ export function NewVenueModal({ isOpen, onClose }: venueModalProps) {
     async function createVenue(data: any) {
         try {
             const token = load("accessToken");
-            console.log("her er token: ", token);
             const body = {
                 name: data.name,
                 description: data.description,

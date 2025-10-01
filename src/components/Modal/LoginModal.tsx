@@ -50,10 +50,10 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
         
         <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col gap-4">
           <input {...register("email")} placeholder="Your email.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-          <p className="text-xs text-red-600 italic">{errors.email?.message}</p>
+          {errors.email && <p className="text-xs text-red-600 italic">Please insert your @stud.noroff.no email</p>}
 
           <input {...register("password")} type="password" placeholder="Your password.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-          <p className="text-xs text-red-600 italic">{errors.password?.message}</p> 
+          {errors.password && <p className="text-xs text-red-600 italic">Please insert your password</p>}
 
           <button type="submit" className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition">
             Log in

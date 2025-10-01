@@ -51,13 +51,13 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
         <form onSubmit={handleSubmit(handleRegister)} className="flex flex-col gap-4">
 
           <input {...register("name")} placeholder="Your name.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />  
-          <p className="text-xs text-red-600 italic">{errors.name?.message}</p>
+          {errors.name && <p className="text-xs text-red-600 italic">Your name can only contain letters, numbers and underscores</p>}
 
           <input {...register("email")} placeholder="Your email.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-          <p className="text-xs text-red-600 italic">{errors.email?.message}</p>
+          {errors.email && <p className="text-xs text-red-600 italic">Please insert your @stud.noroff.no email</p>}
 
           <input {...register("password")} type="password" placeholder="Your password.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-          <p className="text-xs text-red-600 italic">{errors.password?.message}</p>
+          {errors.password &&<p className="text-xs text-red-600 italic">Password must be at least 8 characters</p>}
 
           <label className="flex items-center gap-2 text-sm">
             <input type="checkbox" {...register("isManager")} className="h-4 w-4 text-purple-600 border-gray-300 rounded" />
@@ -73,5 +73,4 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
   );
 
 }
-
 
