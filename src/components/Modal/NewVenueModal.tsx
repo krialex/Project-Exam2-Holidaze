@@ -68,7 +68,6 @@ export function NewVenueModal({ isOpen, onClose }: venueModalProps) {
                     pets: data.pets || false,
                     },
             };
-             console.log("Sending body:", body);
 
             const res = await fetch(`${BASE_API_URL}${ALL_VENUES}`, {
                 method: "POST",
@@ -81,7 +80,6 @@ export function NewVenueModal({ isOpen, onClose }: venueModalProps) {
             });
 
             if(!res.ok) throw new Error("Failed to create new venue");
-
 
             toast.success("Venue created!");
             await refreshUser();

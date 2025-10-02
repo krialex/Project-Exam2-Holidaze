@@ -78,12 +78,14 @@ export function Venues() {
                             >Book your adventure here</button>
                         </div>
                     </div>
-                <Calendar bookings={venue.bookings ?? []}
+                    <div className="md:w-1/2 float-right">
+                        <Calendar bookings={venue.bookings ?? []}
                           onDateSelect={(start, end) => {
                             setSelectedStart(start);
                             setSelectedEnd(end);
-                          }} 
-                />
+                          }} />
+                    </div>
+
                 <BookingModal
                     isOpen={isBookingOpen}
                     onClose={() => setIsBookingOpen(false)}
