@@ -46,6 +46,6 @@ export const editProfileSchema = yup.object({
   avatarAlt: yup
     .string()
     .max(120, "Alt text must be less than 120 characters")
-    .default("")
-    .optional(),
+    .optional()
+    .default(""),
 });

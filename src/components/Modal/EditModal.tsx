@@ -1,28 +1,42 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { UpdateProfile } from "../../common/auth/api/UpdateProfile";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useUser } from "../../context/UserContext";
 import { editProfileSchema } from "./../../common/validationSchemas";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { InferType } from "yup";
 import { toast } from "react-toastify";
 
+type EditProfileFormData = InferType<typeof editProfileSchema>;
 
 type EditModalProps = {
     isOpen: boolean;
     onClose: () => void;
+    defaultValues?: EditProfileFormData;
 };
 
-export function EditModal({ isOpen, onClose}: EditModalProps) {
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm({
-      resolver: yupResolver(editProfileSchema),
+export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
+    const methods = useForm<EditProfileFormData>({
+        resolver: yupResolver(editProfileSchema) as any,
+        defaultValues: defaultValues || {},
     });
+
+    const { 
+      register, 
+      handleSubmit, 
+      formState: { errors }, 
+      reset,
+      watch,
+    } = methods;
+       
     const { refreshUser } = useUser();
+    const avatarUrl = watch("avatarUrl");
+
+    useEffect(() => {
+      if(defaultValues) reset(defaultValues);
+    }, [defaultValues, reset]);
 
     if (!isOpen) return null;
 
@@ -52,37 +66,55 @@ export function EditModal({ isOpen, onClose}: EditModalProps) {
             </button>
             <h2 className="text-xl font-semibold text-center mb-4">Update your profile</h2>
 
-            <form onSubmit={handleSubmit(updateUser)} className="flex flex-col gap-4 bg-gray-50 rounded-lg p-4 shadow-inner">
-              <div>
-                <input
-                  {...register("bio")}
-                  placeholder="Tell everyone about you.."
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
-                />
-                {errors.bio && (
-                  <p className="text-xs text-red-600 italic">{errors.bio.message}</p>
-                )}
-              </div>
+            <FormProvider {...methods}>
+              <form
+                onSubmit={handleSubmit(updateUser)}
+                className="flex flex-col gap-4 bg-gray-50 rounded-lg p-4 shadow-inner">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Bio
+                  </label>
+                  <textarea
+                    {...register("bio")}
+                    placeholder="Tell everyone about you..."
+                    rows={4}
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none resize-none" />
+                </div>
 
-              <div>
-                <input
-                  {...register("avatarUrl")}
-                  placeholder="Update your avatar with an URL.."
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
-                />
-                {errors.avatarUrl && (
-                  <p className="text-xs text-red-600 italic">
-                    {errors.avatarUrl.message}
-                  </p>
-                )}
-              </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Avatar URL
+                  </label>
+                  <input
+                    {...register("avatarUrl")}
+                    placeholder="Paste an image URL..."
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+                  />
+                  {errors.avatarUrl && (
+                    <p className="text-xs text-red-600 italic">
+                      Your avatar needs to be a valid URL
+                    </p>
+                  )}
 
-              <button
-                type="submit"
-                className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition shadow-md w-1/2 mx-auto">
-                Update
-              </button>
-            </form>
+                  {avatarUrl && (
+                    <div className="mt-3 flex justify-center">
+                      <img
+                        src={avatarUrl}
+                        alt="Avatar preview"
+                        onError={(e) => (e.currentTarget.style.display = "none")}
+                        className="w-32 h-32 object-cover rounded-full border border-gray-300 shadow-sm"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition shadow-md w-1/2 mx-auto">
+                  Update
+                </button>
+              </form>
+            </FormProvider>
           </div>
         </>
     )
