@@ -1,11 +1,17 @@
 export function save(key: string, value: any) {
+  if (value === null || value === undefined) {
+    localStorage.removeItem(key); 
+    return;
+  }
+
   try {
-    const serialized = typeof value === "string" ? value : JSON.stringify(value);
-    localStorage.setItem(key, serialized);
+    const stored = typeof value === "object" ? JSON.stringify(value) : value;
+    localStorage.setItem(key, stored);
   } catch (err) {
-    console.error(`Error saving localStorage value for key: ${key}`, err);
+    console.error(`Error saving key "${key}" to localStorage:`, err);
   }
 }
+
 
 
 /**

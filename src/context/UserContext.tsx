@@ -41,9 +41,7 @@ export function UseProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         const token = load<string>("accessToken");
-        if (token) {
-            refreshUser();
-        }
+        if (token) refreshUser();   
     }, [refreshUser]);
 
     return (
