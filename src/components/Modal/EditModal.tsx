@@ -91,7 +91,7 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
                     className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
                   />
                   {errors.avatarUrl && (
-                    <p className="text-xs text-red-600 italic">
+                    <p className="text-xs text-red-600 italic mt-1">
                       Your avatar needs to be a valid URL
                     </p>
                   )}

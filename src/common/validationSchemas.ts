@@ -38,14 +38,14 @@ export const editProfileSchema = yup.object({
   bio: yup
     .string()
     .max(160, "Bio must be less than 160 characters")
-    .optional(),
+    .notRequired(),
   avatarUrl: yup
     .string()
     .url("Avatar must be a valid URL")
-    .optional(),
+    .notRequired(),
   avatarAlt: yup
     .string()
     .max(120, "Alt text must be less than 120 characters")
-    .optional()
+    .notRequired()
     .default(""),
 });
