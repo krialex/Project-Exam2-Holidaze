@@ -1,16 +1,22 @@
 export function save(key: string, value: any) {
+  if (!key) {
+    console.error("localStorage save: missing key!");
+    return;
+  }
+
   if (value === null || value === undefined) {
-    localStorage.removeItem(key); 
+    localStorage.removeItem(key);
     return;
   }
 
   try {
-    const stored = typeof value === "object" ? JSON.stringify(value) : value;
+    const stored = typeof value === "object" ? JSON.stringify(value) : String(value);
     localStorage.setItem(key, stored);
   } catch (err) {
-    console.error(`Error saving key "${key}" to localStorage:`, err);
+    console.error(`Error saving "${key}" to localStorage:`, err);
   }
 }
+
 
 
 

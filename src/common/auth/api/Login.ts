@@ -8,15 +8,10 @@ export async function Login(email: string, password: string, manager?: boolean) 
       "Content-Type": "application/json",
       "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
     },
-    body: JSON.stringify({ 
-      email, 
-      password,
-      venueManager: manager, }),
+    body: JSON.stringify({ email, password, venueManager: manager }),
   });
 
-  if (!response.ok) {
-    throw new Error("Login failed");
-  }
+  if (!response.ok) throw new Error("Login failed");
 
   const data = await response.json();
 
@@ -35,6 +30,7 @@ export async function Login(email: string, password: string, manager?: boolean) 
 
   return data;
 }
+
 
 /**
  * import { save } from "../localStorage/Save";
