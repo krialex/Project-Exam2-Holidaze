@@ -5,19 +5,19 @@ import { StarRating } from "../../ui/StarRating";
 
 
 const venueSchema = yup.object().shape({
-  name: yup.string().required("Name is required"),
-  description: yup.string().required("Description is required"),
-  price: yup.number().min(1, "Price must be positive").required("Price is required"),
-  rating: yup.number().min(0).max(5).default(0),
-  maxGuests: yup.number().min(1).max(100, "Guests between 1–100").required(),
-  address: yup.string().nullable(),
-  city: yup.string().nullable(),
-  country: yup.string().nullable(),
-  mediaUrl: yup.string().url("Must be a valid URL").nullable(),
-  wifi: yup.boolean().default(false),
-  parking: yup.boolean().default(false),
-  breakfast: yup.boolean().default(false),
-  pets: yup.boolean().default(false),
+    name: yup.string().required("Name is required"),
+    description: yup.string().required("Description is required"),
+    price: yup.number().min(1, "Price must be positive").required("Price is required"),
+    rating: yup.number().min(0).max(5).default(0),
+    maxGuests: yup.number().min(1).max(100, "Guests between 1–100").required(),
+    address: yup.string().nullable(),
+    city: yup.string().nullable(),
+    country: yup.string().nullable(),
+    mediaUrl: yup.string().url("Must be a valid URL").nullable(),
+    wifi: yup.boolean().default(false),
+    parking: yup.boolean().default(false),
+    breakfast: yup.boolean().default(false),
+    pets: yup.boolean().default(false),
 });
 
 type venueFormProps = {
@@ -88,7 +88,7 @@ export function VenueForm({ defaultValues, onSubmit, submitLabel = "Save"}: venu
                     <StarRating name="rating" maxStars={5} />
 
                     <button type="submit" className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition shadow-md w-1/2 mx-auto">
-                        Create
+                        {submitLabel}
                     </button>
                 </form>
             </FormProvider>

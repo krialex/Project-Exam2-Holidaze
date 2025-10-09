@@ -13,7 +13,6 @@ export function Venues() {
     const [selectedEnd, setSelectedEnd] = useState<Date | null>(null);
 
     if (isLoading) return <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto my-8" aria-label="Loading spinner"></div>;
-
     if (isError) return <p className="text-center text-red-500 mt-8">Something went wrong.. Try again later.</p>;
 
     return (

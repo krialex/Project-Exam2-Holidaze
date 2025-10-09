@@ -54,8 +54,6 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
             }),
         });
 
-        //const data = await res.json();
-
         if (res.ok) {
             toast.success("booking successful!");
             onClose();
@@ -121,9 +119,20 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
           <small className="text-gray-500">Max {maxGuests}</small>
         </div>
 
+        {(!startDate || !endDate) && (
+          <p className="text-center text-red-600 mb-3 text-sm italic">
+            Please select start and end dates before booking.
+          </p>
+        )}
+
         <button
           onClick={handleConfirmBooking}
-          className="w-full bg-green-600 text-white py-2 rounded-lg shadow-md hover:bg-green-700 transition"
+          disabled={!startDate || !endDate}
+            className={`w-full py-2 rounded-lg shadow-md transition text-white ${
+              !startDate || !endDate
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-green-600 hover:bg-green-700"
+            }`}
         >
           Book Now
         </button>

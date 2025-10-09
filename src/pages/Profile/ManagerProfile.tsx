@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { NewVenueModal } from "../../components/Modal/Venue/NewVenueModal";
 import { EditVenueModal } from "../../components/Modal/Venue/EditVenueModal";
+import { DeleteVenueModal } from "../../components/Modal/Venue/DeleteVenueModal";
 
 type ManagerProfileProps = {
     profile: any;
@@ -12,6 +13,7 @@ export function ManagerProfile({ profile, venues }: ManagerProfileProps) {
     const [isNewVenueOpen, setIsNewVenueOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [selectedVenue, setSelectedVenue] = useState<any | null>(null);
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
     return (
         <div className="flex flex-col gap-4 mx-auto my-6">
@@ -54,14 +56,20 @@ export function ManagerProfile({ profile, venues }: ManagerProfileProps) {
                         <button onClick={(e) => {
                             e.preventDefault();     
                             e.stopPropagation();
-                            setSelectedVenue(v)
-                            setIsEditOpen(true)} 
-                        } 
+                            setSelectedVenue(v);
+                            setIsEditOpen(true);
+                        }} 
                             className="mt-auto bg-[#4996FC] text-white px-3 py-1 rounded hover:bg-[#1c73e5] transition">
-                        Edit
+                            Edit
                         </button>
-                        <button className="mt-auto bg-[#F53232] text-white px-3 py-1 rounded hover:bg-[#c02424] transition">
-                        Delete
+                        <button onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setSelectedVenue(v);
+                            setIsDeleteOpen(true);
+                        }}
+                            className="mt-auto bg-[#F53232] text-white px-3 py-1 rounded hover:bg-[#c02424] transition">
+                            Delete
                         </button>
                     </div>
                     </div>
@@ -82,6 +90,15 @@ export function ManagerProfile({ profile, venues }: ManagerProfileProps) {
                     venue={selectedVenue}   
               />
             )}
+
+            {selectedVenue && (
+                <DeleteVenueModal
+                    isOpen={isDeleteOpen}
+                    onClose={() => setIsDeleteOpen(false)}
+                    venue={selectedVenue}
+                />
+            )}
         </div>
     );
 }
+
