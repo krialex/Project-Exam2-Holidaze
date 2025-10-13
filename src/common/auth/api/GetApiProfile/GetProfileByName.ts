@@ -21,7 +21,6 @@ export async function GetProfileByName() {
     if (!response) throw new Error ("Failed to fetch profile from api");
 
     const data = await response.json();
-    console.log("dette er profilen fra api som er logget inn: ", data.data); 
 
     return data.data;
 }

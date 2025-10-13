@@ -23,6 +23,5 @@ export async function GetBookingsByProfile() {
 
     const json = await res.json();
 
-    console.log("dette er bookingene til bruker: ", json.data);
     return json.data as any[]; 
 }

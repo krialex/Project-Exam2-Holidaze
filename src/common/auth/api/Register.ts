@@ -16,11 +16,13 @@ export async function Register(name: string, email: string, password: string, ma
          }),
     });
 
+    const data = await response.json(); 
+
     if(!response.ok) {
-        throw new Error("Register failed");
+        const errorMessage = data.errors?.[0]?.message || data.message || "Register failed";
+        throw new Error(errorMessage);
     }
 
-    const data = await response.json();
     save("accessToken", data.data.accessToken);
     save("user", { 
         name: data.data.name, 

@@ -23,7 +23,7 @@ export function useVenueIdUrl() {
         const json: ApiResponse = await response.json();
         setVenue(json.data);
       } catch (error) {
-        console.error("Feil ved å hente ut venue fra API", error);
+        console.error("Failed to fetch venue from API", error);
         setIsError(true);
       } finally {
         setIsLoading(false);

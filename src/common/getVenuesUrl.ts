@@ -24,7 +24,7 @@ export function useVenuesApi() {
                for (let page = 1; page <= 2; page++) {
                 const response = await fetch(`${venuesUrl}?page=${page}&limit=100`);
                 if (!response.ok) {
-                    throw new Error(`Feil ved henting av venues (side ${page})`);
+                    throw new Error(`Failed to fetch venues (page ${page})`);
                 }
 
                     const json: ApiResponse = await response.json();
@@ -33,7 +33,7 @@ export function useVenuesApi() {
 
                 setVenues(lastVenues);
             } catch (error) {
-                console.log('Feil ved å hente ut venues fra API', error);
+                console.log('Failed to fetch venues from API', error);
                 setIsError(true);
             } finally {
                 setIsLoading(false);

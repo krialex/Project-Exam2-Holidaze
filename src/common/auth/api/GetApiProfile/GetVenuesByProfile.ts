@@ -23,6 +23,5 @@ export async function GetVenuesByProfile() {
 
     const json = await res.json();
 
-    console.log("dette er venues by manager profile: ", json.data);
     return json.data as any[]; 
 }
