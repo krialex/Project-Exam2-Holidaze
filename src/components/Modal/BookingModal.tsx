@@ -30,11 +30,14 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
 
   const handleConfirmBooking = async () => {
     if (!startDate || !endDate) return;
-
-        if (!user) {
-            toast.error("You must be logged in to book this venue.");
-            return;
-            }
+    if (!user) {
+        toast.error("You must be logged in to book this venue.");
+        return;
+    }
+    if (user?.venueManager) {
+      toast.info("Managers can`t book venues. Please create a customer profile to book a venue");
+      return;
+    }
 
     try {
         const accessToken = load("accessToken");

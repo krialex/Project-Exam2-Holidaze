@@ -72,8 +72,8 @@ export function Venues() {
                                 <p>Price pr night: <span className="font-bold">{venue.price} kr</span></p>
                             </div>
                             <button 
-                            onClick={() => setIsBookingOpen(true)}
-                            className="mt-4 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition"
+                                onClick={() => setIsBookingOpen(true)}
+                                className="mt-4 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition"
                             >Book your adventure here</button>
                         </div>
                     </div>
