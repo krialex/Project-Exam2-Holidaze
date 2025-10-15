@@ -177,7 +177,7 @@ export function Header({ darkMode, setDarkMode, onSearch }: HeaderProps) {
               placeholder="Where to..."
               value={searchTerm}
               onChange={handleSearchChange}
-              className="border-none w-full focus:outline-none text-black dark:text-white dark:bg-gray-700"
+              className="border-none w-full focus:outline-none bg-white text-black dark:text-white dark:bg-gray-700"
             />
           </div>
         </div>
