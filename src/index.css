@@ -21,3 +21,9 @@ body {
 * {
   font-family: inherit;
 }
+
+input,
+textarea,
+select {
+  @apply bg-white text-black dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded-md;
+}
