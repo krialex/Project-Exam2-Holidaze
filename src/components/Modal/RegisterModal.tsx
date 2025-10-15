@@ -59,17 +59,17 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
               <h2 className="text-2xl font-semibold mb-4">Register</h2>
               <form onSubmit={handleSubmit(handleRegister)} className="flex flex-col gap-4">
 
-                <input {...register("name")} placeholder="Your name.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-800  dark:bg-gray-500" />  
+                <input {...register("name")} placeholder="Your name.." className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-800  dark:bg-gray-500" />  
                 {errors.name && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.name.message}</p>}
 
-                <input {...register("email")} placeholder="Your email.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-800  dark:bg-gray-500" />
+                <input {...register("email")} placeholder="Your email.." className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-800  dark:bg-gray-500" />
                 {errors.email && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.email.message}</p>}
 
-                <input {...register("password")} type="password" placeholder="Your password.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-800  dark:bg-gray-500" />
+                <input {...register("password")} type="password" placeholder="Your password.." className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-800  dark:bg-gray-500" />
                 {errors.password &&<p className="text-xs text-red-600 dark:text-red-300 italic">{errors.password.message}</p>}
 
                 <label className="flex items-center gap-2 text-sm">
-                  <input type="checkbox" {...register("isManager")} className="h-4 w-4 text-purple-600 border-gray-300 rounded" />
+                  <input type="checkbox" {...register("isManager")} className="h-4 w-4 bg-white text-purple-600 border-gray-300 rounded" />
                   Register as manager
                 </label>
 

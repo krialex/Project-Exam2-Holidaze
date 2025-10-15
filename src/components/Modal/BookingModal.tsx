@@ -110,7 +110,7 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
             type="text"
             readOnly
             value={guests}
-            className="w-12 text-center border rounded-md dark:text-black"
+            className="w-12 text-center border rounded-md bg-white dark:text-black"
           />
           <button
             onClick={incrementGuests}
@@ -135,8 +135,7 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
               !startDate || !endDate
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-green-600 hover:bg-green-700"
-            }`}
-        >
+            }`}>
           Book Now
         </button>
       </div>

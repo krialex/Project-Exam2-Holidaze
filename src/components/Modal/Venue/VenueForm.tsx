@@ -40,14 +40,14 @@ export function VenueForm({ defaultValues, onSubmit, submitLabel = "Save"}: venu
                     <input 
                         {...register("name")}
                         placeholder="Venue name"
-                        className="border px-3 py-2 rounded dark:bg-gray-500"
+                        className="border px-3 py-2 rounded bg-white dark:bg-gray-500"
                     />
                     {errors.name && <p className="text-xs text-red-600 dark:text-red-300">Please name your venue</p>}
 
                     <textarea
                         {...register("description")}
                         placeholder="Description"
-                        className="border px-3 py-2 rounded dark:bg-gray-500"
+                        className="border px-3 py-2 rounded bg-white dark:bg-gray-500"
                     />
                     {errors.description && <p className="text-xs text-red-600 dark:text-red-300">Please type inn your description of the venue</p>}
 
@@ -55,7 +55,7 @@ export function VenueForm({ defaultValues, onSubmit, submitLabel = "Save"}: venu
                         type="number"
                         {...register("price")}
                         placeholder="Price per night"
-                        className="border px-3 py-2 rounded dark:bg-gray-500"
+                        className="border px-3 py-2 rounded bg-white dark:bg-gray-500"
                     />
                     {errors.price && <p className="text-xs text-red-600 dark:text-red-300">Please enter the price pr night..</p>}
 
@@ -63,20 +63,20 @@ export function VenueForm({ defaultValues, onSubmit, submitLabel = "Save"}: venu
                         type="number"
                         {...register("maxGuests")}
                         placeholder="Max guests"
-                        className="border px-3 py-2 rounded dark:bg-gray-500"
+                        className="border px-3 py-2 rounded bg-white dark:bg-gray-500"
                     />
                     {errors.maxGuests && <p className="text-xs text-red-600 dark:text-red-300">How many guest is there room for?</p>}
 
                     <input
                         {...register("mediaUrl")}
                         placeholder="Image URL"
-                        className="border px-3 py-2 rounded dark:bg-gray-500"
+                        className="border px-3 py-2 rounded bg-white dark:bg-gray-500"
                     />
                     {errors.mediaUrl && <p className="text-xs text-red-600 dark:text-red-300">Please insert a valid url</p>}
 
-                    <input {...register("address")} placeholder="Address" className="border px-3 py-2 rounded dark:bg-gray-500" />
-                    <input {...register("city")} placeholder="City" className="border px-3 py-2 rounded dark:bg-gray-500" />
-                    <input {...register("country")} placeholder="Country" className="border px-3 py-2 rounded dark:bg-gray-500" />
+                    <input {...register("address")} placeholder="Address" className="border px-3 py-2 rounded bg-white dark:bg-gray-500" />
+                    <input {...register("city")} placeholder="City" className="border px-3 py-2 rounded bg-white dark:bg-gray-500" />
+                    <input {...register("country")} placeholder="Country" className="border px-3 py-2 rounded bg-white dark:bg-gray-500" />
 
                     <div className="flex gap-4">
                         <label><input type="checkbox" {...register("wifi")} /> Wifi</label>
