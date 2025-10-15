@@ -75,17 +75,17 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
         className="fixed inset-0 bg-black bg-opacity-50 z-40"
         onClick={onClose}
       ></div>
-      <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6">
+      <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-xl shadow-xl p-6">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition"
+          className="absolute top-4 right-4 text-gray-500 dark:text-white hover:text-gray-700 transition"
         >
           ✕
         </button>
         <h2 className="text-xl font-semibold text-center mb-4">
           Confirm Booking
         </h2>
-        <div className="space-y-2 text-gray-700 mb-4">
+        <div className="space-y-2 text-gray-700 dark:text-white mb-4">
           <p>
             <span className="font-medium">Venue:</span> {venueName}
           </p>
@@ -98,11 +98,11 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
             {endDate?.toLocaleDateString()}
           </p>
         </div>
-        <div className="flex items-center justify-center gap-3 bg-gray-50 rounded-lg shadow-inner py-3 mb-4">
+        <div className="flex items-center justify-center gap-3 bg-gray-50 dark:bg-gray-200 rounded-lg shadow-inner py-3 mb-4">
           <button
             onClick={decrementGuests}
             disabled={guests <= 1}
-            className="px-3 py-1 bg-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-300"
+            className="px-3 py-1 bg-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-300 dark:text-black"
           >
             –
           </button>
@@ -110,20 +110,20 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
             type="text"
             readOnly
             value={guests}
-            className="w-12 text-center border rounded-md"
+            className="w-12 text-center border rounded-md dark:text-black"
           />
           <button
             onClick={incrementGuests}
             disabled={guests >= maxGuests}
-            className="px-3 py-1 bg-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-300"
+            className="px-3 py-1 bg-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-300 dark:text-black"
           >
             +
           </button>
-          <small className="text-gray-500">Max {maxGuests}</small>
+          <small className="text-gray-500 dark:text-black">Max {maxGuests}</small>
         </div>
 
         {(!startDate || !endDate) && (
-          <p className="text-center text-red-600 mb-3 text-sm italic">
+          <p className="text-center text-red-600 dark:text-red-300 mb-3 text-sm italic">
             Please select start and end dates before booking.
           </p>
         )}

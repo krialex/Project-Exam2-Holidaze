@@ -68,7 +68,7 @@ export function EditVenueModal({ isOpen, onClose, venue }: EditVenueModalProps) 
     return (
         <>
             <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={onClose}></div>
-            <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-lg -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl flex flex-col">
+            <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-lg -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-xl shadow-xl flex flex-col">
             <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition">
                 <FontAwesomeIcon icon={faXmark} />
             </button>

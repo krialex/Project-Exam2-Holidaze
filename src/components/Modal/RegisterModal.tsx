@@ -52,21 +52,21 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
         <>
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={onClose}></div>    
             <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                        bg-white text-black rounded-lg shadow-lg z-50 w-11/12 max-w-md p-6">
+                        bg-white dark:bg-gray-700 dark:text-white text-black rounded-lg shadow-lg z-50 w-11/12 max-w-md p-6">
               <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
                   <FontAwesomeIcon icon={faXmark} />
               </button>
               <h2 className="text-2xl font-semibold mb-4">Register</h2>
               <form onSubmit={handleSubmit(handleRegister)} className="flex flex-col gap-4">
 
-                <input {...register("name")} placeholder="Your name.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />  
-                {errors.name && <p className="text-xs text-red-600 italic">{errors.name.message}</p>}
+                <input {...register("name")} placeholder="Your name.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-800  dark:bg-gray-500" />  
+                {errors.name && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.name.message}</p>}
 
-                <input {...register("email")} placeholder="Your email.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                {errors.email && <p className="text-xs text-red-600 italic">{errors.email.message}</p>}
+                <input {...register("email")} placeholder="Your email.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-800  dark:bg-gray-500" />
+                {errors.email && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.email.message}</p>}
 
-                <input {...register("password")} type="password" placeholder="Your password.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                {errors.password &&<p className="text-xs text-red-600 italic">{errors.password.message}</p>}
+                <input {...register("password")} type="password" placeholder="Your password.." className="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-800  dark:bg-gray-500" />
+                {errors.password &&<p className="text-xs text-red-600 dark:text-red-300 italic">{errors.password.message}</p>}
 
                 <label className="flex items-center gap-2 text-sm">
                   <input type="checkbox" {...register("isManager")} className="h-4 w-4 text-purple-600 border-gray-300 rounded" />
@@ -74,10 +74,10 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                 </label>
 
                 {errors.root && (
-                  <p className="text-xs text-red-600 italic mt-1">{errors.root.message}</p>
+                  <p className="text-xs text-red-600 dark:text-red-300 italic mt-1">{errors.root.message}</p>
                 )}
 
-                <button type="submit" className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition">
+                <button type="submit" className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 dark:bg-purple-800 dark:hover:bg-purple-900 transition">
                   Register
                 </button>
               </form>

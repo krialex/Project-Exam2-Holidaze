@@ -56,9 +56,8 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
           <>
           <div
             className="fixed inset-0 bg-black bg-opacity-50 z-40"
-            onClick={onClose}
-          ></div>
-          <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6">
+            onClick={onClose}></div>
+          <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-xl shadow-xl p-6">
             <button
               onClick={onClose}
               className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition">
@@ -69,29 +68,29 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
             <FormProvider {...methods}>
               <form
                 onSubmit={handleSubmit(updateUser)}
-                className="flex flex-col gap-4 bg-gray-50 rounded-lg p-4 shadow-inner">
+                className="flex flex-col gap-4 bg-gray-50 dark:bg-gray-600 rounded-lg p-4 shadow-inner">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
                     Bio
                   </label>
                   <textarea
                     {...register("bio")}
                     placeholder="Tell everyone about you..."
                     rows={4}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none resize-none" />
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none resize-none dark:bg-gray-500" />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
                     Avatar URL
                   </label>
                   <input
                     {...register("avatarUrl")}
                     placeholder="Paste an image URL..."
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none dark:bg-gray-500"
                   />
                   {errors.avatarUrl && (
-                    <p className="text-xs text-red-600 italic mt-1">
+                    <p className="text-xs text-red-600 dark:text-red-300 italic mt-1">
                       Your avatar needs to be a valid URL
                     </p>
                   )}
@@ -110,7 +109,7 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
 
                 <button
                   type="submit"
-                  className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition shadow-md w-1/2 mx-auto">
+                  className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 dark:bg-purple-800 dark:hover:bg-purple-950 transition shadow-md w-1/2 mx-auto">
                   Update
                 </button>
               </form>

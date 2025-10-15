@@ -36,47 +36,47 @@ export function VenueForm({ defaultValues, onSubmit, submitLabel = "Save"}: venu
 
     return (
             <FormProvider {... methods}>
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 bg-gray-50 rounded-lg p-4 shadow-inner overflow-y-auto" style={{ maxHeight: "80vh" }}>
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 bg-gray-50 dark:bg-gray-600 rounded-lg p-4 shadow-inner overflow-y-auto" style={{ maxHeight: "80vh" }}>
                     <input 
                         {...register("name")}
                         placeholder="Venue name"
-                        className="border px-3 py-2 rounded"
+                        className="border px-3 py-2 rounded dark:bg-gray-500"
                     />
-                    {errors.name && <p className="text-xs text-red-600">Please name your venue</p>}
+                    {errors.name && <p className="text-xs text-red-600 dark:text-red-300">Please name your venue</p>}
 
                     <textarea
                         {...register("description")}
                         placeholder="Description"
-                        className="border px-3 py-2 rounded"
+                        className="border px-3 py-2 rounded dark:bg-gray-500"
                     />
-                    {errors.description && <p className="text-xs text-red-600">Please type inn your description of the venue</p>}
+                    {errors.description && <p className="text-xs text-red-600 dark:text-red-300">Please type inn your description of the venue</p>}
 
                     <input
                         type="number"
                         {...register("price")}
                         placeholder="Price per night"
-                        className="border px-3 py-2 rounded"
+                        className="border px-3 py-2 rounded dark:bg-gray-500"
                     />
-                    {errors.price && <p className="text-xs text-red-600">Please enter the price pr night..</p>}
+                    {errors.price && <p className="text-xs text-red-600 dark:text-red-300">Please enter the price pr night..</p>}
 
                     <input
                         type="number"
                         {...register("maxGuests")}
                         placeholder="Max guests"
-                        className="border px-3 py-2 rounded"
+                        className="border px-3 py-2 rounded dark:bg-gray-500"
                     />
-                    {errors.maxGuests && <p className="text-xs text-red-600">How many guest is there room for?</p>}
+                    {errors.maxGuests && <p className="text-xs text-red-600 dark:text-red-300">How many guest is there room for?</p>}
 
                     <input
                         {...register("mediaUrl")}
                         placeholder="Image URL"
-                        className="border px-3 py-2 rounded"
+                        className="border px-3 py-2 rounded dark:bg-gray-500"
                     />
-                    {errors.mediaUrl && <p className="text-xs text-red-600">Please insert a valid url</p>}
+                    {errors.mediaUrl && <p className="text-xs text-red-600 dark:text-red-300">Please insert a valid url</p>}
 
-                    <input {...register("address")} placeholder="Address" className="border px-3 py-2 rounded" />
-                    <input {...register("city")} placeholder="City" className="border px-3 py-2 rounded" />
-                    <input {...register("country")} placeholder="Country" className="border px-3 py-2 rounded" />
+                    <input {...register("address")} placeholder="Address" className="border px-3 py-2 rounded dark:bg-gray-500" />
+                    <input {...register("city")} placeholder="City" className="border px-3 py-2 rounded dark:bg-gray-500" />
+                    <input {...register("country")} placeholder="Country" className="border px-3 py-2 rounded dark:bg-gray-500" />
 
                     <div className="flex gap-4">
                         <label><input type="checkbox" {...register("wifi")} /> Wifi</label>
@@ -87,7 +87,7 @@ export function VenueForm({ defaultValues, onSubmit, submitLabel = "Save"}: venu
 
                     <StarRating name="rating" maxStars={5} />
 
-                    <button type="submit" className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition shadow-md w-1/2 mx-auto">
+                    <button type="submit" className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 dark:bg-purple-800 dark:hover:bg-purple-900 transition shadow-md w-1/2 mx-auto">
                         {submitLabel}
                     </button>
                 </form>

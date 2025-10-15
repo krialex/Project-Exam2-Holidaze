@@ -19,7 +19,7 @@ export function AllVenuesHtml({ venues, isLoading, isError }: AllVenuesHtmlProps
   }
 
   if (!venues || venues.length === 0) {
-    return <p className="text-center text-gray-500">No venues found.</p>;
+    return <p className="text-center text-gray-500 dark:text-white">No venues found.</p>;
   }
 
   return (
@@ -28,7 +28,7 @@ export function AllVenuesHtml({ venues, isLoading, isError }: AllVenuesHtmlProps
         <Link
           key={venue.id}
           to={`/venues/${venue.id}`}
-          className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-200"
+          className="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-200"
         >
           {venue.media?.[0] && (
             <img
@@ -39,7 +39,7 @@ export function AllVenuesHtml({ venues, isLoading, isError }: AllVenuesHtmlProps
           )}
           <div className="p-4 flex flex-col gap-2">
             <h3 className="text-xl font-semibold break-words">{venue.name}</h3>
-            <p className="text-gray-700 text-sm line-clamp-3">{venue.description}</p>
+            <p className="text-gray-700 dark:text-white text-sm line-clamp-3">{venue.description}</p>
             <div className="flex items-center justify-between mt-2">
               <span className="inline-flex items-center gap-1 bg-blue-600 text-white text-sm font-bold rounded px-2 py-1">
                 {venue.rating || 0} <FontAwesomeIcon icon={faStar} size="xs" />

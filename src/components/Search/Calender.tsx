@@ -28,7 +28,7 @@ export function Calendar({ bookings, onDateSelect }: CalendarProps) {
   }, [bookings]);
 
   return (
-    <div className="max-w-sm mx-auto flex justify-center items-center p-3 bg-white rounded-lg shadow-lg">
+    <div className="max-w-sm mx-auto flex justify-center items-center p-3 bg-white dark:bg-gray-300 rounded-lg shadow-lg">
       <DatePicker
         inline
         selectsRange
