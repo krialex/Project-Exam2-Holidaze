@@ -77,7 +77,7 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
                     {...register("bio")}
                     placeholder="Tell everyone about you..."
                     rows={4}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none resize-none dark:bg-gray-500" />
+                    className="w-full border  bg-white border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none resize-none dark:bg-gray-500" />
                 </div>
 
                 <div>
@@ -87,7 +87,7 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
                   <input
                     {...register("avatarUrl")}
                     placeholder="Paste an image URL..."
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none dark:bg-gray-500"
+                    className="w-full border bg-white border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none dark:bg-gray-500"
                   />
                   {errors.avatarUrl && (
                     <p className="text-xs text-red-600 dark:text-red-300 italic mt-1">
