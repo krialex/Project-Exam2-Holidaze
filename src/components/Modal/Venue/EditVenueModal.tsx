@@ -72,7 +72,7 @@ export function EditVenueModal({ isOpen, onClose, venue }: EditVenueModalProps) 
             <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition">
                 <FontAwesomeIcon icon={faXmark} />
             </button>
-            <h2 className="text-xl font-semibold text-center mb-4 mt-6">Create a new venue</h2>
+            <h2 className="text-xl font-semibold text-center mb-4 mt-6">Edit your venue</h2>
 
             <VenueForm onSubmit={updateVenue} 
                 submitLabel="Update"

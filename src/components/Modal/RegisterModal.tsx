@@ -59,13 +59,13 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
               <h2 className="text-2xl font-semibold mb-4">Register</h2>
               <form onSubmit={handleSubmit(handleRegister)} className="flex flex-col gap-4">
 
-                <input {...register("name")} placeholder="Your name.." className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-800  dark:bg-gray-500" />  
+                <input {...register("name")} placeholder="Your name.." className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />  
                 {errors.name && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.name.message}</p>}
 
-                <input {...register("email")} placeholder="Your email.." className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-800  dark:bg-gray-500" />
+                <input {...register("email")} placeholder="Your email.." className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />
                 {errors.email && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.email.message}</p>}
 
-                <input {...register("password")} type="password" placeholder="Your password.." className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-800  dark:bg-gray-500" />
+                <input {...register("password")} type="password" placeholder="Your password.." className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />
                 {errors.password &&<p className="text-xs text-red-600 dark:text-red-300 italic">{errors.password.message}</p>}
 
                 <label className="flex items-center gap-2 text-sm">
@@ -77,7 +77,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                   <p className="text-xs text-red-600 dark:text-red-300 italic mt-1">{errors.root.message}</p>
                 )}
 
-                <button type="submit" className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 dark:bg-purple-800 dark:hover:bg-purple-900 transition">
+                <button type="submit" className="mt-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 dark:bg-indigo-800 dark:hover:bg-indigo-900 transition">
                   Register
                 </button>
               </form>

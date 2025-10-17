@@ -85,12 +85,12 @@ export function Header({ darkMode, setDarkMode, onSearch }: HeaderProps) {
               <>
                   <button 
                   onClick={openRegisterModal}
-                  className="ml-4 px-4 py-2 rounded-lg bg-white text-[#05059D]  dark:bg-purple-800 dark:hover:bg-purple-900 dark:text-white transition-transform duration-200 ease-in-out hover:shadow-lg hover:-translate-y-1"
+                  className="ml-4 px-4 py-2 rounded-lg bg-white text-[#05059D]  dark:bg-indigo-800 dark:hover:bg-indigo-900 dark:text-white transition-transform duration-200 ease-in-out hover:shadow-lg hover:-translate-y-1"
                   >Register
                   </button>
                   <button 
                   onClick={openLoginModal}
-                  className="ml-4 px-4 py-2 rounded-lg bg-white text-[#05059D]  dark:bg-purple-800 dark:hover:bg-purple-900 dark:text-white transition-transform duration-200 ease-in-out hover:shadow-lg hover:-translate-y-1"
+                  className="ml-4 px-4 py-2 rounded-lg bg-white text-[#05059D]  dark:bg-indigo-800 dark:hover:bg-indigo-900 dark:text-white transition-transform duration-200 ease-in-out hover:shadow-lg hover:-translate-y-1"
                   >Log in
                   </button>
               </>
@@ -99,10 +99,10 @@ export function Header({ darkMode, setDarkMode, onSearch }: HeaderProps) {
               <div className="flex items-center gap-4">
                 <button 
                 onClick={goToProfile} 
-                className="text-white text-3xl p-0 bg-transparent dark:text-purple-900 dark:hover:text-purple-950 transition-transform duration-200 ease-in-out hover:shadow-lg hover:-translate-y-1"><FontAwesomeIcon icon={faUser} /></button>
+                className="text-white text-3xl p-0 bg-transparent dark:text-indigo-900 dark:hover:text-indigo-950 transition-transform duration-200 ease-in-out hover:shadow-lg hover:-translate-y-1"><FontAwesomeIcon icon={faUser} /></button>
                 <button 
                 onClick={handleLogout}
-                className="px-4 py-2 rounded-lg bg-white text-[#05059D] dark:bg-purple-800 dark:hover:bg-purple-900 dark:text-white transition-transform duration-200 ease-in-out hover:shadow-lg hover:-translate-y-1"
+                className="px-4 py-2 rounded-lg bg-white text-[#05059D] dark:bg-indigo-800 dark:hover:bg-indigo-900 dark:text-white transition-transform duration-200 ease-in-out hover:shadow-lg hover:-translate-y-1"
                 >Log out
                 </button>
               </div>
@@ -114,7 +114,7 @@ export function Header({ darkMode, setDarkMode, onSearch }: HeaderProps) {
           <div className="relative md:hidden" ref={dropdownRef}>
             <button
               onClick={() => setMenuOpen((prev) => !prev)}
-              className="text-white dark:text-purple-950 text-3xl bg-transparent p-2 rounded-full hover:bg-white/20 transition">
+              className="text-white dark:text-indigo-950 text-3xl bg-transparent p-2 rounded-full hover:bg-white/20 transition">
               <FontAwesomeIcon icon={faUser} />
             </button>
 
@@ -127,7 +127,7 @@ export function Header({ darkMode, setDarkMode, onSearch }: HeaderProps) {
                         openLoginModal();
                         setMenuOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-purple-900">
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-indigo-900">
                       Log in
                     </button>
                     <button
@@ -135,7 +135,7 @@ export function Header({ darkMode, setDarkMode, onSearch }: HeaderProps) {
                         openRegisterModal();
                         setMenuOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-purple-900">
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-indigo-900">
                       Register
                     </button>
                   </>
@@ -146,7 +146,7 @@ export function Header({ darkMode, setDarkMode, onSearch }: HeaderProps) {
                         goToProfile();
                         setMenuOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-purple-900">
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-indigo-900">
                       Profile
                     </button>
                     <button
@@ -154,7 +154,7 @@ export function Header({ darkMode, setDarkMode, onSearch }: HeaderProps) {
                         handleLogout();
                         setMenuOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-purple-900">
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-indigo-900">
                       Log out
                     </button>
                   </>
@@ -169,7 +169,7 @@ export function Header({ darkMode, setDarkMode, onSearch }: HeaderProps) {
 
         {shouldShowSearch && (
         <div className="mt-8 text-center">
-          <h1 className="font-henny text-4xl text-white dark:text-purple-900">Where is your next destination?</h1>
+          <h1 className="font-henny text-4xl text-white dark:text-indigo-900">Where is your next destination?</h1>
           <div className="flex gap-1 max-w-xs mx-auto mt-4 p-1 rounded-md shadow-md bg-white dark:bg-gray-700">
             <FontAwesomeIcon icon={faLocationDot} className="text-[#6B37F8] dark:text-white" />
             <input

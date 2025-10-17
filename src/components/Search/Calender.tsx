@@ -41,6 +41,7 @@ export function Calendar({ bookings, onDateSelect }: CalendarProps) {
               primaryColor="purple"
               placeholder="Select your dates"
               separator="to"
+              popoverDirection="up"
               inputClassName="w-full rounded-md p-2 font-normal bg-gray-50 border-2 border-solid"
             />
           </div>

@@ -19,7 +19,7 @@ export function ManagerProfile({ profile, venues }: ManagerProfileProps) {
         <div className="flex flex-col gap-4 mx-auto my-6">
             <div className="flex justify-end mr-2">
             <button onClick={() => setIsNewVenueOpen(true)}
-                className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 dark:bg-purple-800 dark:hover:bg-purple-900 transition text-sm">
+                className="bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 dark:bg-indigo-800 dark:hover:bg-indigo-900 transition text-sm">
                 Create a new venue
             </button>
             </div>

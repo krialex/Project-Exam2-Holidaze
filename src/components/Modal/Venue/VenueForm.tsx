@@ -87,7 +87,7 @@ export function VenueForm({ defaultValues, onSubmit, submitLabel = "Save"}: venu
 
                     <StarRating name="rating" maxStars={5} />
 
-                    <button type="submit" className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 dark:bg-purple-800 dark:hover:bg-purple-900 transition shadow-md w-1/2 mx-auto">
+                    <button type="submit" className="mt-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:bg-indigo-800 dark:hover:bg-indigo-900 transition shadow-md w-1/2 mx-auto">
                         {submitLabel}
                     </button>
                 </form>

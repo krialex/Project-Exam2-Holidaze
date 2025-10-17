@@ -109,7 +109,7 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
 
                 <button
                   type="submit"
-                  className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 dark:bg-purple-800 dark:hover:bg-purple-950 transition shadow-md w-1/2 mx-auto">
+                  className="mt-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:bg-indigo-800 dark:hover:bg-indigo-900 transition shadow-md w-1/2 mx-auto">
                   Update
                 </button>
               </form>

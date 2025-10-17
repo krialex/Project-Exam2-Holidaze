@@ -84,7 +84,7 @@ export function Venues() {
 
                             <button 
                                 onClick={() => setIsBookingOpen(true)}
-                                className="mt-4 bg-purple-600 dark:bg-purple-800 text-white px-4 py-2 rounded hover:bg-purple-700 dark:hover:bg-purple-950 transition"
+                                className="mt-4 bg-indigo-600 dark:bg-indigo-800 text-white px-4 py-2 rounded hover:bg-indigo-700 dark:hover:bg-indigo-900 transition"
                             >Book your adventure here</button>
                         </div>
                     </div>
