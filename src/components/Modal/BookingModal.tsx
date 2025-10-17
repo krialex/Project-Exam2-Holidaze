@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import { useState } from "react";
 import { load } from "../../common/auth/localStorage/Load";
 import { BASE_API_URL, ALL_BOOKINGS } from "../../common/url";
 import { useUser } from "../../context/UserContext";

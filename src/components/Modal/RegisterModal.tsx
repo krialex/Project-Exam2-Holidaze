@@ -69,7 +69,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                 {errors.password &&<p className="text-xs text-red-600 dark:text-red-300 italic">{errors.password.message}</p>}
 
                 <label className="flex items-center gap-2 text-sm">
-                  <input type="checkbox" {...register("isManager")} className="h-4 w-4 bg-white border-gray-300 rounded" />
+                  <input type="checkbox" {...register("isManager")} className="appearance-none w-4 h-4 border-2 border-gray-400 rounded-sm bg-white checked:bg-blue-500 checked:border-blue-500 custom-checkbox" />
                   Register as manager
                 </label>
 

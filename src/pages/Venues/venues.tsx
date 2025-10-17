@@ -18,14 +18,14 @@ export function Venues() {
     return (
         <>
         {venue && (
-            <div className="max-w-3xl mx-auto my-6 p-4">
+            <div className="max-w-4xl mx-auto my-6 p-4">
                 {venue.media?.[0] && (
                 <img className="w-full rounded-lg mb-4"
                     src={venue.media[0].url}
                     alt={venue.media[0].alt || venue.name} 
                 />
                 )}
-                    <h2 className="text-2xl font-bold text-center mb-4 break-words">{venue.name}</h2>
+                    <h1 className="text-3xl font-bold text-center mb-4 break-words">{venue.name}</h1>
                     <div className="flex flex-col items-center gap-4 mb-6">
                         <p className="bg-blue-600 text-white px-3 py-1 rounded inline-flex items-center gap-1">{venue.rating} <FontAwesomeIcon icon={faStar} size="xs" /></p>
                         <ul className="flex gap-8 italic text-gray-700 dark:text-white">
@@ -54,14 +54,16 @@ export function Venues() {
                             />
                             </li>
                         </ul>
+                        <hr className="border-gray-300 border-t-2 my-4 w-full" />
                     </div>
                     <div className="flex flex-col md:flex-row gap-6">
                         <div className="md:w-1/2">
-                            <h3 className="text-lg font-semibold mb-2">About our venue</h3>
+                            <h2 className="text-2xl font-semibold mb-2">About our venue</h2>
                             <p className="text-gray-700 dark:text-white">{venue.description}</p>
                         </div>
-                        <div className="md:w-1/2 bg-white dark:bg-gray-700 rounded-lg shadow-md p-6 text-center">
-                            <h4 className="font-semibold mb-2">More info</h4>
+
+                        <div className="md:w-1/2 bg-white dark:bg-gray-700 rounded-lg shadow-md p-6 text-center box-border">
+                            <h2 className="font-semibold text-2xl mb-2">More info</h2>
                             <div className="flex flex-col gap-3 text-left italic">
                                 <p>Max guests: <span className="font-bold">{venue.maxGuests}</span></p>
                                 <p>Address: <span>{venue.location.address}</span></p>
@@ -71,18 +73,20 @@ export function Venues() {
                                 <hr className="border-t border-gray-300 my-2 opacity-50" />
                                 <p>Price pr night: <span className="font-bold">{venue.price} kr</span></p>
                             </div>
+
+                            <div className="w-full">
+                                <Calendar bookings={venue.bookings ?? []}
+                                onDateSelect={(start, end) => {
+                                    setSelectedStart(start);
+                                    setSelectedEnd(end);
+                                }} />
+                            </div>
+
                             <button 
                                 onClick={() => setIsBookingOpen(true)}
                                 className="mt-4 bg-purple-600 dark:bg-purple-800 text-white px-4 py-2 rounded hover:bg-purple-700 dark:hover:bg-purple-950 transition"
                             >Book your adventure here</button>
                         </div>
-                    </div>
-                    <div className="md:w-1/2 float-right">
-                        <Calendar bookings={venue.bookings ?? []}
-                          onDateSelect={(start, end) => {
-                            setSelectedStart(start);
-                            setSelectedEnd(end);
-                          }} />
                     </div>
 
                 <BookingModal
@@ -94,7 +98,6 @@ export function Venues() {
                     endDate={selectedEnd}
                     maxGuests={venue.maxGuests}
                 />
- 
             </div>
         )}
         </>
