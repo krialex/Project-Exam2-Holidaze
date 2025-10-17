@@ -1,4 +1,162 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { load } from "../../common/auth/localStorage/Load";
+import { BASE_API_URL, ALL_BOOKINGS } from "../../common/url";
+import { useUser } from "../../context/UserContext";
+import { toast } from "react-toastify";
+
+type BookingModalProps = {
+    isOpen: boolean;
+    onClose: () => void;
+    venueId: string;
+    venueName: string;
+    startDate: Date | null;
+    endDate: Date | null;
+    maxGuests: number;
+    pricePrNight: number;
+};
+
+export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, endDate, maxGuests, pricePrNight, }: BookingModalProps) {
+    const { user } = useUser();
+    const [guests, setGuests] = useState(1);
+
+    
+
+    const incrementGuests = () => setGuests((prev) => Math.min(prev + 1, maxGuests));
+    const decrementGuests = () => setGuests((prev) => Math.max(prev - 1, 1));
+
+    const numberOfNights = useMemo(() => {
+      if (!startDate || !endDate) return 0;
+      const diffMs = endDate.getTime() - startDate.getTime();
+      return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+    }, [startDate, endDate]);
+
+    const totalPrice = numberOfNights * pricePrNight
+  
+    const handleConfirmBooking = async () => {
+      if (!startDate || !endDate) return;
+      if (!user) {
+          toast.error("You must be logged in to book this venue.");
+          return;
+      }
+      if (user?.venueManager) {
+        toast.info("Managers can`t book venues. Please create a customer profile to book a venue");
+        return;
+      }
+
+      try {
+          const accessToken = load("accessToken");
+
+          const res = await fetch(`${BASE_API_URL}${ALL_BOOKINGS}`, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+                  "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
+                  Authorization: `Bearer ${accessToken}`,
+              },
+              body: JSON.stringify({
+                  dateFrom: startDate.toISOString(),
+                  dateTo: endDate.toISOString(),
+                  guests,
+                  venueId,
+              }),
+          });
+
+          if (res.ok) {
+              toast.success("booking successful!");
+              onClose();
+          } else {
+              toast.error("Booking failed, please try again.");
+          }
+      } catch (err) {
+          console.error(err);
+          toast.error("something went wrong when booking. Please try again later.");
+      }
+    };
+
+    if (!isOpen) return null;
+
+    return (
+      <>
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={onClose}
+        ></div>
+        <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-xl shadow-xl p-6">
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-gray-500 dark:text-white hover:text-gray-700 transition"
+          >
+            ✕ 
+          </button>
+          <h2 className="text-xl font-semibold text-center mb-4">
+            Confirm Booking
+          </h2>
+          <div className="space-y-2 text-gray-700 dark:text-white mb-4">
+            <p>
+              <span className="font-medium">Venue:</span> {venueName}
+            </p>
+            <p>
+              <span className="font-medium">From:</span>{" "}
+              {startDate?.toLocaleDateString()}
+            </p>
+            <p>
+              <span className="font-medium">To:</span>{" "}
+              {endDate?.toLocaleDateString()}
+            </p>
+          </div>
+          <div className="flex items-center justify-center gap-3 bg-gray-50 dark:bg-gray-200 rounded-lg shadow-inner py-3 mb-4">
+            <button
+              onClick={decrementGuests}
+              disabled={guests <= 1}
+              className="px-3 py-1 bg-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-300 dark:text-black"
+            >
+              –
+            </button>
+            <input
+              type="text"
+              readOnly
+              value={guests}
+              className="w-12 text-center border rounded-md bg-white dark:text-black"
+            />
+            <button
+              onClick={incrementGuests}
+              disabled={guests >= maxGuests}
+              className="px-3 py-1 bg-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-300 dark:text-black"
+            >
+              +
+            </button>
+            <small className="text-gray-500 dark:text-black">Max {maxGuests}</small>
+          </div>
+          {numberOfNights > 0 && (
+            <p className="text-center font-medium mb-3">
+              Total price ({numberOfNights} night{numberOfNights > 1 ? "s" : ""}):{" "}
+              <span className="">{totalPrice} kr</span>
+            </p>
+          )}
+
+          {(!startDate || !endDate) && (
+            <p className="text-center text-red-600 dark:text-red-300 mb-3 text-sm italic">
+              Please select start and end dates before booking.
+            </p>
+          )}
+
+          <button
+            onClick={handleConfirmBooking}
+            disabled={!startDate || !endDate}
+              className={`w-full py-2 rounded-lg shadow-md transition text-white ${
+                !startDate || !endDate
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-green-600 hover:bg-green-700"
+              }`}>
+            Book Now
+          </button>
+        </div>
+      </>
+    );
+  }
+
+/**
+ * import { useState } from "react";
 import { load } from "../../common/auth/localStorage/Load";
 import { BASE_API_URL, ALL_BOOKINGS } from "../../common/url";
 import { useUser } from "../../context/UserContext";
@@ -143,3 +301,5 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
   );
 }
 
+
+ */

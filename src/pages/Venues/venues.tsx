@@ -97,6 +97,7 @@ export function Venues() {
                     startDate={selectedStart}
                     endDate={selectedEnd}
                     maxGuests={venue.maxGuests}
+                    pricePrNight={venue.price}
                 />
             </div>
         )}
