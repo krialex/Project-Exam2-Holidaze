@@ -39,12 +39,14 @@ export function UserMenu({ openLogin, openRegister }: UserMenuProps) {
         <>
           <button
             onClick={openRegister}
+            aria-label="Register"
             className="ml-4 px-4 py-2 rounded-lg bg-white text-[#05059D] dark:bg-indigo-800 dark:text-white hover:shadow-lg"
           >
             Register
           </button>
           <button
             onClick={openLogin}
+            aria-label="Log in"
             className="ml-4 px-4 py-2 rounded-lg bg-white text-[#05059D] dark:bg-indigo-800 dark:text-white hover:shadow-lg"
           >
             Log in
@@ -54,12 +56,14 @@ export function UserMenu({ openLogin, openRegister }: UserMenuProps) {
         <div className="flex items-center gap-4">
           <button
             onClick={goToProfile}
+            aria-label="User profile"
             className="text-white text-3xl bg-transparent dark:text-indigo-900 hover:shadow-lg"
           >
             <FontAwesomeIcon icon={faUser} />
           </button>
           <button
             onClick={handleLogout}
+            aria-label="Log out"
             className="px-4 py-2 rounded-lg bg-white text-[#05059D] dark:bg-indigo-800 dark:text-white hover:shadow-lg"
           >
             Log out
