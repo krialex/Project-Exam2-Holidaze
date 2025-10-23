@@ -80,6 +80,7 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
         <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-xl shadow-xl p-6">
           <button
             onClick={onClose}
+            aria-label="close"
             className="absolute top-4 right-4 text-gray-500 dark:text-white hover:text-gray-700 transition"
           >
             ✕ 

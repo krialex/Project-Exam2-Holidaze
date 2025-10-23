@@ -70,10 +70,11 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
                 onSubmit={handleSubmit(updateUser)}
                 className="flex flex-col gap-4 bg-gray-50 dark:bg-gray-600 rounded-lg p-4 shadow-inner">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
+                  <label htmlFor="bio" className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
                     Bio
                   </label>
                   <textarea
+                    id="bio"
                     {...register("bio")}
                     placeholder="Tell everyone about you..."
                     rows={4}
@@ -81,10 +82,11 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
+                  <label htmlFor="avatarUrl" className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
                     Avatar URL
                   </label>
                   <input
+                    id="avatarUrl"
                     {...register("avatarUrl")}
                     placeholder="Paste an image URL..."
                     className="w-full border bg-white border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none dark:bg-gray-500"

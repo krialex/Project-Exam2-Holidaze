@@ -18,6 +18,10 @@ export const registerSchema = yup.object({
     .string()
     .min(8, "Password must be at least 8 characters")
     .required("Password is required"),
+  confirmPassword: yup
+    .string()
+    .required('Confirm Password is required')
+    .oneOf([yup.ref('password')], 'Passwords must match'),
   isManager: yup.boolean(),
 });
 
@@ -49,3 +53,4 @@ export const editProfileSchema = yup.object({
     .notRequired()
     .default(""),
 });
+

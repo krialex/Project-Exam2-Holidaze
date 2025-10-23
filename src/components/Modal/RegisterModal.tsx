@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Register } from "../../common/auth/api/Register"; 
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -29,7 +28,8 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
 
      async function handleRegister(data: any) {
         try {
-          await Register(data.name, data.email, data.password, data.isManager);
+          const { name, email, password, isManager } = data;
+          await Register(name, email, password, isManager);
           await Login(data.email, data.password);
           await refreshUser();
           toast.success("Registration successful!");
@@ -59,20 +59,36 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
               <h2 className="text-2xl font-semibold mb-4">Register</h2>
               <form onSubmit={handleSubmit(handleRegister)} className="flex flex-col gap-4">
 
-                <input {...register("name")} placeholder="Your name.." className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />  
-                {errors.name && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.name.message}</p>}
+                <input {...register("name")} 
+                  placeholder="Your name.." 
+                  aria-label="name" 
+                  className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />  
+                  {errors.name && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.name.message}</p>}
 
-                <input {...register("email")} placeholder="Your email.." className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />
-                {errors.email && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.email.message}</p>}
+                <input {...register("email")} 
+                  placeholder="Your email.." 
+                  aria-label="email" 
+                  className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />
+                  {errors.email && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.email.message}</p>}
 
-                <input {...register("password")} type="password" placeholder="Your password.." className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />
-                {errors.password &&<p className="text-xs text-red-600 dark:text-red-300 italic">{errors.password.message}</p>}
+                <input {...register("password")} 
+                  type="password" 
+                  aria-label="password" 
+                  placeholder="Your password.." 
+                  className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />
+                  {errors.password && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.password.message}</p>}
 
-                <label className="flex items-center gap-2 text-sm">
-                  <input type="checkbox" {...register("isManager")} className="appearance-none w-4 h-4 border-2 border-gray-400 rounded-sm bg-white checked:bg-blue-500 checked:border-blue-500 custom-checkbox" />
+                <input {...register("confirmPassword")}
+                  type="password"
+                  aria-label="confirm password"
+                  placeholder="Confirm your password.."
+                  className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />
+                  {errors.confirmPassword && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.confirmPassword.message}</p>}
+
+                <label htmlFor="checkbox" className="flex items-center gap-2 text-sm">
+                  <input type="checkbox" id="checkbox" {...register("isManager")} className="appearance-none w-4 h-4 border-2 border-gray-400 rounded-sm bg-white checked:bg-blue-500 checked:border-blue-500 custom-checkbox" />
                   Register as manager
                 </label>
-
                 {errors.root && (
                   <p className="text-xs text-red-600 dark:text-red-300 italic mt-1">{errors.root.message}</p>
                 )}
@@ -85,4 +101,3 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
           </>
       );
 }
- 
