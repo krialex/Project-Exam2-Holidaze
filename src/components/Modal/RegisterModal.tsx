@@ -22,8 +22,8 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
     } = useForm({
       resolver: yupResolver(registerSchema),
     });
-    const { refreshUser } = useUser();
 
+    const { refreshUser } = useUser();
     if(!isOpen) return null;
 
      async function handleRegister(data: any) {
@@ -35,8 +35,6 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
           toast.success("Registration successful!");
           onClose();
         } catch (error: any) {
-          console.log("Registration failed: ", error);
-          
           if (
             error.message?.toLowerCase().includes("already exists") ||
             error.message?.toLowerCase().includes("exists")
@@ -51,51 +49,47 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
     return (
         <>
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={onClose}></div>    
-            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                        bg-white dark:bg-gray-700 dark:text-white text-black rounded-lg shadow-lg z-50 w-11/12 max-w-md p-6">
-              <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
-                  <FontAwesomeIcon icon={faXmark} />
-              </button>
+            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 dark:text-white text-black rounded-lg shadow-lg z-50 w-11/12 max-w-md p-6">
+              <button 
+                onClick={onClose} 
+                className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"><FontAwesomeIcon icon={faXmark} /></button>
               <h2 className="text-2xl font-semibold mb-4">Register</h2>
               <form onSubmit={handleSubmit(handleRegister)} className="flex flex-col gap-4">
-
                 <input {...register("name")} 
                   placeholder="Your name.." 
                   aria-label="name" 
                   className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />  
                   {errors.name && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.name.message}</p>}
-
                 <input {...register("email")} 
                   placeholder="Your email.." 
                   aria-label="email" 
                   className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />
                   {errors.email && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.email.message}</p>}
-
                 <input {...register("password")} 
                   type="password" 
                   aria-label="password" 
                   placeholder="Your password.." 
                   className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />
                   {errors.password && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.password.message}</p>}
-
                 <input {...register("confirmPassword")}
                   type="password"
                   aria-label="confirm password"
                   placeholder="Confirm your password.."
                   className="bg-white border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-800  dark:bg-gray-500" />
                   {errors.confirmPassword && <p className="text-xs text-red-600 dark:text-red-300 italic">{errors.confirmPassword.message}</p>}
-
-                <label htmlFor="checkbox" className="flex items-center gap-2 text-sm">
-                  <input type="checkbox" id="checkbox" {...register("isManager")} className="appearance-none w-4 h-4 border-2 border-gray-400 rounded-sm bg-white checked:bg-blue-500 checked:border-blue-500 custom-checkbox" />
-                  Register as manager
-                </label>
+                <label 
+                  htmlFor="checkbox" 
+                  className="flex items-center gap-2 text-sm">
+                  <input {...register("isManager")} 
+                    type="checkbox" 
+                    id="checkbox" 
+                    className="appearance-none w-4 h-4 border-2 border-gray-400 rounded-sm bg-white checked:bg-blue-500 checked:border-blue-500 custom-checkbox" />Register as manager</label>
                 {errors.root && (
                   <p className="text-xs text-red-600 dark:text-red-300 italic mt-1">{errors.root.message}</p>
                 )}
-
-                <button type="submit" className="mt-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 dark:bg-indigo-800 dark:hover:bg-indigo-900 transition">
-                  Register
-                </button>
+                <button 
+                  type="submit" 
+                  className="mt-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 dark:bg-indigo-800 dark:hover:bg-indigo-900 transition">Register</button>
               </form>
             </div>
           </>

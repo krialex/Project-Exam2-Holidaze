@@ -27,8 +27,7 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
       return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
     }, [startDate, endDate]);
 
-    const totalPrice = numberOfNights * pricePrNight
-  
+    const totalPrice = numberOfNights * pricePrNight;
     const handleConfirmBooking = async () => {
       if (!startDate || !endDate) return;
       if (!user) {
@@ -39,7 +38,6 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
         toast.info("Managers can`t book venues. Please create a customer profile to book a venue");
         return;
       }
-
       try {
           const accessToken = load("accessToken");
           const res = await fetch(`${BASE_API_URL}${ALL_BOOKINGS}`, {
@@ -64,7 +62,6 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
               toast.error("Booking failed, please try again.");
           }
       } catch (err) {
-          console.error(err);
           toast.error("something went wrong when booking. Please try again later.");
       }
     };
@@ -73,55 +70,32 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
 
     return (
       <>
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
-          onClick={onClose}
-        ></div>
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={onClose}></div>
         <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-xl shadow-xl p-6">
           <button
             onClick={onClose}
             aria-label="close"
-            className="absolute top-4 right-4 text-gray-500 dark:text-white hover:text-gray-700 transition"
-          >
-            ✕ 
-          </button>
-          <h2 className="text-xl font-semibold text-center mb-4">
-            Confirm Booking
-          </h2>
+            className="absolute top-4 right-4 text-gray-500 dark:text-white hover:text-gray-700 transition">✕ </button>
+          <h2 className="text-xl font-semibold text-center mb-4">Confirm Booking</h2>
           <div className="space-y-2 text-gray-700 dark:text-white mb-4">
-            <p>
-              <span className="font-medium">Venue:</span> {venueName}
-            </p>
-            <p>
-              <span className="font-medium">From:</span>{" "}
-              {startDate?.toLocaleDateString()}
-            </p>
-            <p>
-              <span className="font-medium">To:</span>{" "}
-              {endDate?.toLocaleDateString()}
-            </p>
+            <p><span className="font-medium">Venue:</span> {venueName}</p>
+            <p><span className="font-medium">From:</span>{" "}{startDate?.toLocaleDateString()}</p>
+            <p><span className="font-medium">To:</span>{" "}{endDate?.toLocaleDateString()}</p>
           </div>
           <div className="flex items-center justify-center gap-3 bg-gray-50 dark:bg-gray-200 rounded-lg shadow-inner py-3 mb-4">
             <button
               onClick={decrementGuests}
               disabled={guests <= 1}
-              className="px-3 py-1 bg-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-300 dark:text-black"
-            >
-              –
-            </button>
+              className="px-3 py-1 bg-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-300 dark:text-black">–</button>
             <input
               type="text"
               readOnly
               value={guests}
-              className="w-12 text-center border rounded-md bg-white dark:text-black"
-            />
+              className="w-12 text-center border rounded-md bg-white dark:text-black" />
             <button
               onClick={incrementGuests}
               disabled={guests >= maxGuests}
-              className="px-3 py-1 bg-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-300 dark:text-black"
-            >
-              +
-            </button>
+              className="px-3 py-1 bg-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-300 dark:text-black">+</button>
             <small className="text-gray-500 dark:text-black">Max {maxGuests}</small>
           </div>
           {numberOfNights > 0 && (
@@ -144,9 +118,7 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
                 !startDate || !endDate
                   ? "bg-gray-400 cursor-not-allowed"
                   : "bg-green-600 hover:bg-green-700"
-              }`}>
-            Book Now
-          </button>
+              }`}>Book Now</button>
         </div>
       </>
     );

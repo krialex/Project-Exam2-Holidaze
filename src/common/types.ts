@@ -2,7 +2,6 @@ export interface Image {
     url: string;
     alt?: string;
 }
-
 export interface User {
     name: string;
     email: string;
@@ -17,7 +16,6 @@ export interface User {
         bookings: number;
     }
 }
-
 export interface Venue {
     id: string;
     name: string;
@@ -45,19 +43,15 @@ export interface Venue {
         wifi: boolean;
         parking: boolean;
         pets: boolean;
-        /* her kan jeg legge til fler om jeg vil */
     }
     bookings?: Booking[];
 }
-
 export interface ApiResponse {
   data: Venue; 
 }
 export interface CalendarProps {
-    //id: string;
     bookings?: Booking[];
 }
-
 export interface Booking {
     id: string;
     dateFrom: string;

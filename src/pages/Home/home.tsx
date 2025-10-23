@@ -8,7 +8,6 @@ type ContextType = { searchTerm: string };
 export function Home() {
   const { venues, isLoading, isError } = useVenuesApi();
   const { searchTerm } = useOutletContext<ContextType>();
-
   const filteredVenues = useFilteredVenues({ venues, searchTerm });
 
   return (

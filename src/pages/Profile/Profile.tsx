@@ -9,7 +9,6 @@ import { GetVenuesByProfile } from "../../common/auth/api/GetApiProfile/GetVenue
 import { ManagerProfile } from "./ManagerProfile";
 import { CostumerProfile } from "./CostumerProfile";
 
-
 export function Profile() {
     const { user, refreshUser } = useUser();
     const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +23,6 @@ export function Profile() {
         setIsLoading(false);
         return;
         }
-
         setIsLoading(true);
         setIsError(null);
 
@@ -47,36 +45,27 @@ export function Profile() {
     }, [user]);
 
 
-    if (isLoading) {
-         return <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto my-8" aria-label="Loading spinner"></div> 
-        }
+    if (isLoading) { return <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto my-8" aria-label="Loading spinner"></div> }
     if(isError) return <div className="text-red-500">{isError}</div>
-
     if (!user) { return <Navigate to="/" replace /> }
 
-     function openEditModal() {
+    function openEditModal() {
         setIsEditOpen(true);
     }
-
     const avatarUrl = user.avatar?.url || "/img/default-avatar.png";
 
     return ( 
         <div className="max-w-3xl mx-auto flex flex-col gap-6">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 bg-white dark:bg-gray-700 rounded-xl shadow-md p-4 mt-4">
-
             <div className="flex flex-row items-center gap-3 sm:gap-4">
             <div className="relative shrink-0">
                 <img
                 src={avatarUrl}
                 alt={user.avatar?.alt || "User avatar"}
-                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full shadow-lg ring-1 ring-gray-200"
-                />
+                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full shadow-lg ring-1 ring-gray-200" />
                 <button
                 onClick={openEditModal}
-                className="absolute top-10 sm:top-12 right-[-8px] bg-transparent hover:text-indigo-600"
-                >
-                <FontAwesomeIcon icon={faPenToSquare} />
-                </button>
+                className="absolute top-10 sm:top-12 right-[-8px] bg-transparent hover:text-indigo-600"><FontAwesomeIcon icon={faPenToSquare} /></button>
             </div>
             <div className="flex flex-col gap-0.5 min-w-0">
                 <p className="font-bold text-base sm:text-lg truncate">{user.name}</p>
@@ -84,15 +73,12 @@ export function Profile() {
                 <p className="break-all text-sm">{user.email}</p>
             </div>
             </div>
-
             <div className="flex flex-col gap-1 min-w-[150px] sm:text-left sm:items-center">
             <p className="italic text-xs sm:text-sm">About me:</p>
             <p className="max-w-[250px] text-sm sm:text-base">{user.bio}</p>
             </div>
         </div>
-
         <hr className="border-t border-gray-300 my-4 opacity-50" />
-
         {/* Manager or Customer Info */}
            {user.venueManager ? (
                 <ManagerProfile profile={user} venues={venuesWithBookings} />
@@ -107,8 +93,7 @@ export function Profile() {
                     bio: user?.bio || "",
                     avatarUrl: user?.avatar?.url || "",
                     avatarAlt: user?.avatar?.alt || "",
-                }}
-            />
+                }} />
         </div> 
     );
 }

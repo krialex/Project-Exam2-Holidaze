@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import {BASE_API_URL, ALL_VENUES } from "./url";
 import { Venue } from "./types";
-
 interface ApiResponse {
     data: Venue[];
 }
@@ -20,24 +19,18 @@ export function useVenuesApi() {
                 setIsError(false);
 
                 let lastVenues: Venue[] = [];
-
-               for (let page = 1; page <= 2; page++) {
+                for (let page = 1; page <= 2; page++) {
                 const response = await fetch(`${venuesUrl}?page=${page}&limit=100`);
                 if (!response.ok) {
                     throw new Error(`Failed to fetch venues (page ${page})`);
                 }
-
                     const json: ApiResponse = await response.json();
                     lastVenues = [...lastVenues, ...json.data];
                 }
-
                 setVenues(lastVenues);
             } catch (error) {
-                console.log('Failed to fetch venues from API', error);
                 setIsError(true);
-            } finally {
-                setIsLoading(false);
-            }
+            } finally { setIsLoading(false); }
         }
         getVenues();
     }, []);

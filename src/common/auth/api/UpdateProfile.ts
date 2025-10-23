@@ -9,18 +9,16 @@ type Avatar = {
 export async function UpdateProfile(avatar: Avatar, bio: string) {
     const user = load<{ name: string }>("user");
     if(!user) throw new Error ("no logged-in user found");
-
     const token = load<string>("accessToken");
     if (!token) throw new Error ("no access token found");
 
     const url = `${BASE_API_URL}${ALL_PROFILES}/${user.name}`;
-
     const response = await fetch(url, {
         method: "PUT",
         headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-            "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+          "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
         },
         body: JSON.stringify({
             bio,
@@ -30,9 +28,8 @@ export async function UpdateProfile(avatar: Avatar, bio: string) {
             },
         })
     });
+
     if (!response) throw new Error ("Failed to update profile info");
-
     const data = await response.json();
-
     return data.data;
 }

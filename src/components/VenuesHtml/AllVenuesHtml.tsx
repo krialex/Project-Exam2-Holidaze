@@ -10,14 +10,8 @@ interface AllVenuesHtmlProps {
 }
 
 export function AllVenuesHtml({ venues, isLoading, isError }: AllVenuesHtmlProps) {
-  if (isLoading) {
-    return <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>;
-  }
-
-  if (isError) {
-    return <p className="text-center text-red-600">Something went wrong.. Try again later.</p>;
-  }
-
+  if (isLoading) { return <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>; }
+  if (isError) { return <p className="text-center text-red-600">Something went wrong.. Try again later.</p>; }
   if (!venues || venues.length === 0) {
     return <p className="text-center text-gray-500 dark:text-white">No venues found.</p>;
   }

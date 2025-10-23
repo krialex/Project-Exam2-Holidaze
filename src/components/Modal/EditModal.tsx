@@ -23,14 +23,7 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
         defaultValues: defaultValues || {},
     });
 
-    const { 
-      register, 
-      handleSubmit, 
-      formState: { errors }, 
-      reset,
-      watch,
-    } = methods;
-       
+    const { register, handleSubmit, formState: { errors }, reset, watch, } = methods;
     const { refreshUser } = useUser();
     const avatarUrl = watch("avatarUrl");
 
@@ -44,7 +37,6 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
         try {
             await UpdateProfile({ url: data.avatarUrl, alt: data.avatarAlt || "" }, data.bio);
             await refreshUser();
-
             toast.success("Profile updated!")
             onClose();
         } catch (error) {
@@ -54,25 +46,18 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
 
     return (
           <>
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
-            onClick={onClose}></div>
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={onClose}></div>
           <div className="fixed top-1/2 left-1/2 z-50 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-700 rounded-xl shadow-xl p-6">
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition">
-              <FontAwesomeIcon icon={faXmark} />
-            </button>
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition"><FontAwesomeIcon icon={faXmark} /></button>
             <h2 className="text-xl font-semibold text-center mb-4">Update your profile</h2>
-
             <FormProvider {...methods}>
               <form
                 onSubmit={handleSubmit(updateUser)}
                 className="flex flex-col gap-4 bg-gray-50 dark:bg-gray-600 rounded-lg p-4 shadow-inner">
                 <div>
-                  <label htmlFor="bio" className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
-                    Bio
-                  </label>
+                  <label htmlFor="bio" className="block text-sm font-medium text-gray-700 dark:text-white mb-1">Bio</label>
                   <textarea
                     id="bio"
                     {...register("bio")}
@@ -80,11 +65,8 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
                     rows={4}
                     className="w-full border  bg-white border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none resize-none dark:bg-gray-500" />
                 </div>
-
                 <div>
-                  <label htmlFor="avatarUrl" className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
-                    Avatar URL
-                  </label>
+                  <label htmlFor="avatarUrl" className="block text-sm font-medium text-gray-700 dark:text-white mb-1">Avatar URL</label>
                   <input
                     id="avatarUrl"
                     {...register("avatarUrl")}
@@ -96,7 +78,6 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
                       Your avatar needs to be a valid URL
                     </p>
                   )}
-
                   {avatarUrl && (
                     <div className="mt-3 flex justify-center">
                       <img
@@ -108,12 +89,9 @@ export function EditModal({ isOpen, onClose, defaultValues }: EditModalProps) {
                     </div>
                   )}
                 </div>
-
                 <button
                   type="submit"
-                  className="mt-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:bg-indigo-800 dark:hover:bg-indigo-900 transition shadow-md w-1/2 mx-auto">
-                  Update
-                </button>
+                  className="mt-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:bg-indigo-800 dark:hover:bg-indigo-900 transition shadow-md w-1/2 mx-auto">Update</button>
               </form>
             </FormProvider>
           </div>

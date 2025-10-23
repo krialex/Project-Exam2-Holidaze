@@ -10,10 +10,9 @@ type StarRatingProps = {
   maxStars?: number;
 };
 
-export function StarRating({ name, maxStars = 6 }: StarRatingProps) {
+export function StarRating({ name, maxStars = 5 }: StarRatingProps) {
   const { watch, setValue } = useFormContext();
   const [hover, setHover] = useState(0);
-
   const rating = watch(name) || 0;
 
   return (

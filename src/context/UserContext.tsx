@@ -11,7 +11,6 @@ type UserContextType = {
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
-
 export function UseProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(() => load<User>("user"));
     const isRefreshing = useRef(false);
@@ -31,7 +30,6 @@ export function UseProvider({ children }: { children: React.ReactNode }) {
             setUser(profile);
             save("user", profile);
         } catch (err) {
-            console.error("refreshUser failed: ", err);
             const stored = load<User>("user");
             setUser(stored);
         } finally {

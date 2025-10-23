@@ -13,16 +13,14 @@ export async function Register(name: string, email: string, password: string, ma
             email, 
             password, 
             venueManager: manager,
-         }),
+            }),
     });
 
     const data = await response.json(); 
-
     if(!response.ok) {
         const errorMessage = data.errors?.[0]?.message || data.message || "Register failed";
         throw new Error(errorMessage);
     }
-
     save("accessToken", data.data.accessToken);
     save("user", { 
         name: data.data.name, 
