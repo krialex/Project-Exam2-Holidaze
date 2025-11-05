@@ -19,6 +19,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
       formState: { errors },
     } = useForm({
       resolver: yupResolver(loginSchema),
+      mode: 'onBlur',
     });
 
     const { refreshUser } = useUser();
@@ -37,7 +38,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
     return (
         <>
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={onClose}></div>
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={onClose} data-testid="backdrop"></div>
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                     bg-white dark:bg-gray-700 dark:text-white text-black rounded-lg shadow-lg z-50 w-11/12 max-w-md p-6">
             <button 
