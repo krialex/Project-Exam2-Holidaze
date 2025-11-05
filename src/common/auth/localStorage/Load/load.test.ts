@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { load } from './../../../src/common/auth/localStorage/Load'
+import { load } from './Load'
 
 describe('load()', () => {
   beforeEach(() => {

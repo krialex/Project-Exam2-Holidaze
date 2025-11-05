@@ -1,5 +1,5 @@
-import { save } from "../localStorage/Save";
-import { BASE_API_URL, REGISTER } from "../../url";
+import { save } from "./../../localStorage/Save/Save";
+import { BASE_API_URL, REGISTER } from "./../../../url";
 
 export async function Register(name: string, email: string, password: string, manager: boolean) {
     const response = await fetch(`${BASE_API_URL}${REGISTER}`, {

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { UpdateProfile } from "../../common/auth/api/UpdateProfile";
+import { UpdateProfile } from "./../../common/auth/api/UpdateProfile/UpdateProfile";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useUser } from "../../context/UserContext";

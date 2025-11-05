@@ -15,5 +15,5 @@
 
     "noEmit": true
   },
-  "include": ["src", "vite-env.d.ts"]
+  "include": ["src", "Tests", "vite-env.d.ts"]
 }

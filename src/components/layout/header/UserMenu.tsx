@@ -2,7 +2,7 @@ import { useUser } from "./../../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { save } from "./../../../common/auth/localStorage/Save";
+import { save } from "./../../../common/auth/localStorage/Save/Save";
 import { useEffect } from "react";
 
 type UserMenuProps = {

@@ -1,5 +1,5 @@
-import { save } from "../localStorage/Save";
-import { BASE_API_URL, LOGIN } from "../../url";
+import { save } from "./../../localStorage/Save/Save";
+import { BASE_API_URL, LOGIN } from "./../../../url";
 
 export async function Login(email: string, password: string, manager?: boolean) {
     const response = await fetch(`${BASE_API_URL}${LOGIN}`, {

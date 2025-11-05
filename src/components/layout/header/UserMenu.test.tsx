@@ -1,11 +1,11 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, vi, expect } from "vitest";
-import { UserMenu } from "./../../src/components/layout/header/UserMenu";
-import { useUser } from "./../../src/context/UserContext";
+import { UserMenu } from "./UserMenu";
+import { useUser } from "./../../../context/UserContext";
 import { BrowserRouter } from "react-router-dom";
 import type { Mock } from 'vitest';
 
-vi.mock("./../../src/context/UserContext");
+vi.mock("./../../../context/UserContext.tsx");
 
 describe("UserMenu", () => {
   const mockUseUser = useUser as unknown as Mock;
@@ -18,7 +18,7 @@ describe("UserMenu", () => {
     vi.clearAllMocks();
   });
 
-  it("viser Log in og Register når ingen er logget inn", () => {
+  it("shows Log in and Register when no one is loged in", () => {
     mockUseUser.mockReturnValue({ user: null, setUser, refreshUser });
 
     render(
@@ -37,7 +37,7 @@ describe("UserMenu", () => {
     expect(openRegister).toHaveBeenCalled();
   });
 
-  it("viser Log out og profil-knapp når bruker er logget inn", () => {
+  it("shows Log out and profile icon when user is loged in", () => {
     mockUseUser.mockReturnValue({ user: { name: "Test" }, setUser, refreshUser });
 
     render(

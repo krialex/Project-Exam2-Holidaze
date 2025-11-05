@@ -1,4 +1,4 @@
-import { useVenuesApi } from "../../common/getVenuesUrl";
+import { useVenuesApi } from "./../../common/getVenuesUrl";
 import { AllVenuesHtml } from "./../../components/VenuesHtml/AllVenuesHtml";
 import { useFilteredVenues } from "./../../components/Search/Search"; 
 import { useOutletContext } from "react-router-dom";

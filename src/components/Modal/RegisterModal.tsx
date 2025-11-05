@@ -1,11 +1,11 @@
-import { Register } from "../../common/auth/api/Register"; 
+import { Register } from "./../../common/auth/api/Register/Register"; 
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useUser } from "../../context/UserContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "./../../common/validationSchemas";
-import { Login } from "../../common/auth/api/Login";
+import { Login } from "./../../common/auth/api/Login/Login";
 import { toast } from "react-toastify";
 
 type RegisterModalProps = {

@@ -1,4 +1,4 @@
-import { Login } from "../../common/auth/api/Login";
+import { Login } from "./../../common/auth/api/Login/Login";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useUser } from "../../context/UserContext";

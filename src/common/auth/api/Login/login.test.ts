@@ -1,11 +1,10 @@
-vi.stubGlobal('import.meta', { env: { VITE_API_KEY: 'test-key' } })
-vi.mock('../../../src/common/auth/localStorage/Save', () => ({
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { Login } from './Login'
+import { save } from './../../localStorage/Save/Save'
+
+vi.mock('./../../localStorage/Save/Save.ts', () => ({
   save: vi.fn(),
 }))
-
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { Login } from '../../../src/common/auth/api/Login'
-import { save } from '../../../src/common/auth/localStorage/Save'
 
 describe('Login()', () => {
   beforeEach(() => {
@@ -52,3 +51,5 @@ describe('Login()', () => {
     await expect(Login('test@test.com', 'wrong')).rejects.toThrow('Login failed')
   })
 })
+
+ 

@@ -1,5 +1,5 @@
-import { BASE_API_URL, ALL_PROFILES } from "../../url";
-import { load } from "../localStorage/Load";
+import { BASE_API_URL, ALL_PROFILES } from "./../../../url";
+import { load } from "./../../localStorage/Load/Load";
 
 type Avatar = {
   url: string;

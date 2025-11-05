@@ -2,7 +2,7 @@ import { useUser } from "../../../context/UserContext";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BASE_API_URL, ALL_VENUES } from "../../../common/url";
-import { load } from "../../../common/auth/localStorage/Load";
+import { load } from "./../../../common/auth/localStorage/Load/Load";
 import { toast } from "react-toastify";
 import { VenueForm } from "./VenueForm";
 

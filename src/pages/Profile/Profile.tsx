@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { EditModal } from "./../../components/Modal/EditModal";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "./../../context/UserContext";
 import { Navigate } from "react-router-dom";
 import { GetBookingsByProfile } from "../../common/auth/api/GetApiProfile/GetBookingsByProfile";
 import { GetVenuesByProfile } from "../../common/auth/api/GetApiProfile/GetVenuesByProfile";
