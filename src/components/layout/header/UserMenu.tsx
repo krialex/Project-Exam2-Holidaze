@@ -6,34 +6,34 @@ import { save } from "./../../../common/auth/localStorage/Save/Save";
 import { useEffect } from "react";
 
 type UserMenuProps = {
-  openLogin: () => void;
-  openRegister: () => void;
+    openLogin: () => void;
+    openRegister: () => void;
 };
 
 export function UserMenu({ openLogin, openRegister }: UserMenuProps) {
-  const { user, setUser, refreshUser } = useUser();
-  const navigate = useNavigate();
+    const { user, setUser, refreshUser } = useUser();
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    refreshUser();
-  }, [refreshUser]);
+    useEffect(() => {
+      refreshUser();
+    }, [refreshUser]);
 
-  function handleLogout() {
+function handleLogout() {
     save("user", null);
     save("accessToken", null);
     setUser(null);
     navigate("/");
-  }
+}
 
-  function goToProfile() {
+function goToProfile() {
     if (!user) {
       openLogin();
       return;
     }
     navigate("/profile");
-  }
+}
 
-  return (
+   return (
     <div className="hidden md:flex items-center">
       {!user ? (
         <>

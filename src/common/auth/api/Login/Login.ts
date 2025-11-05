@@ -1,13 +1,11 @@
 import { save } from "./../../localStorage/Save/Save";
 import { BASE_API_URL, LOGIN } from "./../../../url";
+import { fetchPublicHeaders } from "../config/fetchHeaders";
 
 export async function Login(email: string, password: string, manager?: boolean) {
     const response = await fetch(`${BASE_API_URL}${LOGIN}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
-      },
+      headers: fetchPublicHeaders(),
       body: JSON.stringify({ 
         email, 
         password,

@@ -2,7 +2,7 @@ import { useUser } from "../../../context/UserContext";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BASE_API_URL, ALL_VENUES } from "../../../common/url";
-import { load } from "./../../../common/auth/localStorage/Load/Load";
+import { fetchHeaders } from "../../../common/auth/api/config/fetchHeaders";
 import { toast } from "react-toastify";
 
 type DeleteVenueModalProps = {
@@ -17,14 +17,9 @@ export function DeleteVenueModal({ isOpen, onClose, venue }: DeleteVenueModalPro
 
     async function deleteVenue() {
         try {
-            const token = load("accessToken");
             const res = await fetch(`${BASE_API_URL}${ALL_VENUES}/${venue.id}`, {
                 method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                    "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
-                }
+                headers: fetchHeaders()
             });
 
             if(!res.ok) throw new Error("Failed to delete venue");

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { load } from "./../../common/auth/localStorage/Load/Load";
+import { fetchHeaders } from "../../common/auth/api/config/fetchHeaders";
 import { BASE_API_URL, ALL_BOOKINGS } from "./../../common/url";
 import { useUser } from "../../context/UserContext";
 import { toast } from "react-toastify";
@@ -39,14 +39,9 @@ export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, e
         return;
       }
       try {
-          const accessToken = load("accessToken");
           const res = await fetch(`${BASE_API_URL}${ALL_BOOKINGS}`, {
               method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-                  "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
-                  Authorization: `Bearer ${accessToken}`,
-              },
+              headers: fetchHeaders(),
               body: JSON.stringify({
                   dateFrom: startDate.toISOString(),
                   dateTo: endDate.toISOString(),

@@ -1,5 +1,6 @@
 import { BASE_API_URL, ALL_PROFILES } from "./../../../url";
 import { load } from "./../../localStorage/Load/Load";
+import { fetchHeaders } from "../config/fetchHeaders";
 
 type Avatar = {
   url: string;
@@ -9,17 +10,10 @@ type Avatar = {
 export async function UpdateProfile(avatar: Avatar, bio: string) {
     const user = load<{ name: string }>("user");
     if(!user) throw new Error ("no logged-in user found");
-    const token = load<string>("accessToken");
-    if (!token) throw new Error ("no access token found");
-
     const url = `${BASE_API_URL}${ALL_PROFILES}/${user.name}`;
     const response = await fetch(url, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-          "X-Noroff-API-Key": import.meta.env.VITE_API_KEY,
-        },
+        headers: fetchHeaders(),
         body: JSON.stringify({
             bio,
             avatar: {
@@ -33,3 +27,4 @@ export async function UpdateProfile(avatar: Avatar, bio: string) {
     const data = await response.json();
     return data.data;
 }
+
