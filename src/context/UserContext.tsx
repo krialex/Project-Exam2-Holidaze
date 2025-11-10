@@ -11,6 +11,28 @@ type UserContextType = {
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
+
+/**
+ * Gives access to logged in use everywhere in the app
+ * Fetches user from localStorage
+ * Automatically updates with GetProfileByName() if token exists
+ * Stops multiple updates with useRef
+ * Use with <UseProvider> on top of <App /> in main.tsx
+ *
+ * @param {React.ReactNode} children - The whole app
+ *
+ * @example
+ * // In main.tsx
+ * <UseProvider>
+ *   <App />
+ * </UseProvider>
+ *
+ * @example
+ * // In a component
+ * const { user, refreshUser } = useUser();
+ * if (user) console.log("Hello,", user.name);
+ */
+
 export function UseProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(() => load<User>("user"));
     const isRefreshing = useRef(false);

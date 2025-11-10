@@ -12,6 +12,18 @@ type LoginModalProps = {
     onClose: () => void;
 };
 
+/**
+ * Shows LoginModal when user clicks Log in button
+ * Uses react-hook-form + Yup for validation
+ * Calls Login function if input values are correct
+ * Throws error with toast if login fails
+ * Closes modal and updates user context if success
+ * 
+ * @param {boolean} isOpen - if modal shows
+ * @param {() => void} onClose - function that closes modal
+ * 
+ */
+
 export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     const {
       register,

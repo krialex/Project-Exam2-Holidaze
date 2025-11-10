@@ -9,6 +9,22 @@ interface AllVenuesHtmlProps {
   isError: boolean;
 }
 
+/**
+ * Displays list of venues in a grid
+ * - Shows loading-spinner when data is loading
+ * - Shows error if something went wrong
+ * - Shows "No venues found." if the list is empty
+ * - Every venue has a image, name, short description, rating and breakfast icon
+ * - Clickable – sends user to detail page
+ *
+ * @param {Object} props
+ * @param {Venue[]} props.venues - List of venues
+ * @param {boolean} props.isLoading - True if data is loading
+ * @param {boolean} props.isError - True if error
+ *
+ * @returns Grid of venues
+ */
+
 export function AllVenuesHtml({ venues, isLoading, isError }: AllVenuesHtmlProps) {
   if (isLoading) { return <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>; }
   if (isError) { return <p className="text-center text-red-600">Something went wrong.. Try again later.</p>; }

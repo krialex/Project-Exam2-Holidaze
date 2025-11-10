@@ -15,6 +15,35 @@ type BookingModalProps = {
     pricePrNight: number;
 };
 
+/**
+ * Shows modal to create a booking on venue
+ * Checks if user is logged in as costumer (not manager)
+ * Calculate number of nights and total price
+ * Sends booking to the API if success
+ * Shows error if something fails
+ * 
+ * @param {boolean} isOpen - If modal shows
+ * @param {() => void} onClose - Function that closes modal
+ * @param {string} venueId - ID for venue with booking
+ * @param {string} venueName - Name of venue
+ * @param {Date|null} startDate - Chosen start date
+ * @param {Date|null} endDate - Chosen end date
+ * @param {number} maxGuests - Max guests pr night
+ * @param {number} pricePrNight - Price pr night
+ * 
+ * @example
+ * <BookingModal
+ *    isOpen={true}
+ *    onClose{() => setShowBooking(false)}
+ *    venueId="123"
+ *    venueName="Cozy Cabin"
+ *    startDate={new Date("2025-06-10")}
+ *    endDate={new Date("2025-06-15")}
+ *    maxGuests={4}
+ *    pricePrNight={120}
+ * />
+ */
+
 export function BookingModal({ isOpen, onClose, venueId, venueName, startDate, endDate, maxGuests, pricePrNight, }: BookingModalProps) {
     const { user } = useUser();
     const [guests, setGuests] = useState(1);

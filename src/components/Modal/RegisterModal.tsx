@@ -13,6 +13,17 @@ type RegisterModalProps = {
     onClose: () => void;
 };
 
+/**
+ * Shows RegisterModal when user clicks Register button
+ * Uses react-hook-form + Yup for validation
+ * Calls Register and Login function if input values are correct
+ * Throws error if register fails
+ * Closes modal and updates user context if success
+ * 
+ * @param {boolean} isOpen - if modal shows
+ * @param {() => void} onClose - function that closes modal
+ */
+
 export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
     const {
       register,
