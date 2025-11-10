@@ -46,7 +46,7 @@ I decided to build this project with **Vite + React** because it’s fast to set
 
 Make sure you have the following installed:
 
-- [Node.js](https://nodejs.org/)
+- [Node.js](https://nodejs.org/) (make sure to have the latest version)
 - [npm](https://www.npmjs.com/)
 
 ### Installing
