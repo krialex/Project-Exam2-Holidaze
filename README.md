@@ -13,7 +13,7 @@ The site has two main parts:
 
 I decided to build this project with **Vite + React** because it’s fast to set up, has a clean developer experience, and works great with modern tools like **Tailwind CSS** and **React Hook Form**. The requirements included:
 
-- Fetch venues from an external API and display them on the homepage
+- View all venues with responsive grid on the homepage
 - Let users click on a venue to view detailed information on a separate page
 - Allow registered customers to book a venue
 - Customers can view their bookings on their profile page
@@ -28,7 +28,7 @@ I decided to build this project with **Vite + React** because it’s fast to set
 
 ⚡ Vite – Lightning-fast development environment
 
-🎨 Tailwind CSS – Utility-first CSS framework for styling
+🎨 Tailwind CSS – Utility-first styling + dark mode
 
 🧩 React Hook Form + Yup – For form handling and validation
 
