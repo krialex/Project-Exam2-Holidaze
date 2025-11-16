@@ -45,6 +45,13 @@ export interface Venue {
         pets: boolean;
     }
     bookings?: Booking[];
+    owner: {
+        name: string;
+        avatar: {
+            url: string;
+            alt: string;
+        }
+    }
 }
 export interface ApiResponse {
   data: Venue; 
